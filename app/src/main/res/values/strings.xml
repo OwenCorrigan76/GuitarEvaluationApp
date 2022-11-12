@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Guitar Evaluation</string>
+    <string name="button_addGuitar">Add Guitar</string>
+    <string name="button_addCounty">Add County</string>
+    <string name="valueTitle">Input Value</string>
+    <string name="valueSubtitle">Evaluate Guitar</string>
+    <string name="hint_guitarMake">Guitar Make</string>
+    <string name="hint_guitarModel">Guitar Model</string>
+    <string name="amount"><u>Valuation €</u>.</string>
+
+</resources>
