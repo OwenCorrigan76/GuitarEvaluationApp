@@ -1,10 +1,14 @@
 package org.wit.ValueGuitar.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import com.google.android.material.snackbar.Snackbar
 import org.wit.ValueGuitar.main.MainApp
 import org.wit.ValueGuitar.models.GuitarModel
+import org.wit.valueGuitar.R
 import org.wit.valueGuitar.databinding.ActivityValueGuitarBinding
 import timber.log.Timber.i
 
@@ -18,6 +22,8 @@ class ValueGuitarActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityValueGuitarBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.toolbarAdd.title = title
+        setSupportActionBar(binding.toolbarAdd)
 
         app = application as MainApp
         i("Activity started..")
@@ -39,15 +45,28 @@ class ValueGuitarActivity : AppCompatActivity() {
             gModel.valuation = binding.valuePicker.value.toDouble()
 
             if (gModel.guitarMake.isNotEmpty()) {
-                app.guitarsStore.create(gModel.copy())
-                i("add Button Pressed: ${gModel}")
-                for (i in app.guitars.indices)
-                    i("add Button Pressed: ${gModel.guitarMake + gModel.guitarModel + gModel.value + gModel.year}")
+                app.guitars.create(gModel.copy())
+
+                setResult(RESULT_OK)
+                finish()
+
+                    i("add Button Pressed: ${gModel.guitarMake + gModel.guitarModel + gModel.value + gModel.valuation +  gModel.year}")
             } else {
                 Snackbar
                     .make(it, "Please Enter Guitar Make", Snackbar.LENGTH_LONG)
                     .show()
             }
         }
+    }
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_guitar, menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.item_cancel -> { finish() }
+        }
+        return super.onOptionsItemSelected(item)
     }
 }

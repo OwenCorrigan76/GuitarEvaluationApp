@@ -3,9 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="app/src/main/res/layout/activity_guitar_list.xml" value="0.13229166666666667" />
         <entry key="app/src/main/res/layout/activity_music_store.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_placemark.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_value_guitar.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/card_guitar.xml" value="0.3454233805338542" />
+        <entry key="app/src/main/res/menu/menu_date.xml" value="0.1453125" />
+        <entry key="app/src/main/res/menu/menu_guitar.xml" value="0.1453125" />
+        <entry key="app/src/main/res/menu/menu_main.xml" value="0.1453125" />
       </map>
     </option>
   </component>
