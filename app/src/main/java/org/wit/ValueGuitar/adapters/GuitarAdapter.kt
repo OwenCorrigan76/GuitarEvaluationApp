@@ -3,6 +3,7 @@ package org.wit.ValueGuitar.adapters
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.squareup.picasso.Picasso
 import org.wit.ValueGuitar.models.GuitarModel
 import org.wit.valueGuitar.databinding.CardGuitarBinding
 
@@ -43,6 +44,8 @@ class GuitarAdapter constructor(
             binding.valuation.text = ("€" + guitar.valuation.toDouble().toString())
             binding.guitarMake.text = guitar.guitarMake
             binding.guitarModel.text = guitar.guitarModel
+            binding.root.setOnClickListener { listener.onGuitarClick(guitar) }
+            Picasso.get().load(guitar.image).resize(200, 200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onGuitarClick(guitar) }
         }
     }

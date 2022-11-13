@@ -1,16 +1,22 @@
 package org.wit.ValueGuitar.activities
 
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import com.google.android.material.snackbar.Snackbar
+import org.wit.ValueGuitar.helpers.showImagePicker
 import org.wit.ValueGuitar.main.MainApp
 import org.wit.ValueGuitar.models.GuitarModel
 import org.wit.valueGuitar.R
 import org.wit.valueGuitar.databinding.ActivityValueGuitarBinding
 import timber.log.Timber.i
+import com.squareup.picasso.Picasso
 
 /**
 This is the ValueGuitar activity in the app.
@@ -22,6 +28,7 @@ class ValueGuitarActivity : AppCompatActivity() {
     private lateinit var binding: ActivityValueGuitarBinding
     var gModel = GuitarModel() // get from the model
     lateinit var app: MainApp
+    private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent> // initialise
 
     var edit = false
 
@@ -58,7 +65,12 @@ class ValueGuitarActivity : AppCompatActivity() {
             binding.guitarMakeAdd.setText(gModel.guitarMake)
             binding.guitarModelAdd.setText(gModel.guitarModel)
             binding.addGuitar.setText(R.string.button_saveGuitar)
-
+            Picasso.get()
+                .load(gModel.image)
+                .into(binding.guitarImage)
+            if (gModel.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_guitar_image)
+            }
         }
         /** binding addGuitar button to event listener **/
         binding.addGuitar.setOnClickListener() {
@@ -84,6 +96,11 @@ class ValueGuitarActivity : AppCompatActivity() {
             finish()
         }
 
+        binding.chooseImage.setOnClickListener {
+            showImagePicker(imageIntentLauncher)
+        }
+        registerImagePickerCallback()
+
     }
         /** inflates the menu **/
         override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -100,6 +117,27 @@ class ValueGuitarActivity : AppCompatActivity() {
             }
             return super.onOptionsItemSelected(item)
         }
+
+    private fun registerImagePickerCallback() {
+        imageIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Result ${result.data!!.data}")
+                            gModel.image = result.data!!.data!!
+                            Picasso.get()
+                                .load(gModel.image)
+                                .into(binding.guitarImage)
+                            binding.chooseImage.setText(R.string.change_guitar_image)
+                        }
+                    }
+                    RESULT_CANCELED -> {}
+                    else -> {}
+                }
+            }
+    }
     }
 
 

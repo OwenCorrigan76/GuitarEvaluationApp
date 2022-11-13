@@ -71,7 +71,6 @@
 
                 <TextView
                     android:id="@+id/valueTitle"
-                    android:textSize="16sp"
                     android:layout_width="188dp"
                     android:layout_height="30dp"
                     android:layout_alignParentStart="true"
@@ -83,6 +82,7 @@
                     android:layout_marginBottom="8dp"
                     android:text="@string/valueTitle"
                     android:textAppearance="?android:attr/textAppearanceLarge"
+                    android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.044"
@@ -163,6 +163,24 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.781" />
+
+                <Button
+                    android:id="@+id/chooseImage"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16dp"
+                    android:background="@color/colorAccent"
+                    android:paddingTop="8dp"
+                    android:paddingBottom="8dp"
+                    android:text="@string/button_addImage"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+                <ImageView
+                    android:id="@+id/guitarImage"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    app:srcCompat="@mipmap/ic_launcher" />
 
                 <Button
                     android:id="@+id/addGuitar"

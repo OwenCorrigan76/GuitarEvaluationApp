@@ -1,5 +1,6 @@
 package org.wit.ValueGuitar.models
 
+import android.net.Uri
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
@@ -17,4 +18,5 @@ data class GuitarModel(
     var id: Long = 0,
     val year: Int = 0,
     val serialNumber: Long = 0L,
+    var image: Uri = Uri.EMPTY,  // default value is empty Uri
 ) : Parcelable
