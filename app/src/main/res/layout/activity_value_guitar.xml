@@ -54,6 +54,22 @@
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
                     android:textSize="14sp" />
+                <Spinner
+                    android:id="@+id/guitarMake"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_margin="8dp"
+                    android:layout_weight="1"
+                    android:inputType="text"
+                    android:maxLength="25"
+                    android:maxLines="1"
+                    android:padding="158dp"
+                    android:spinnerMode="dropdown"
+                    android:textColor="@color/black"
+                    android:textSize="30sp"
+                    tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
+
+
 
                 <EditText
                     android:id="@+id/guitarModelAdd"
@@ -106,6 +122,10 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.333" />
 
+                <ImageView
+                    android:id="@+id/guitarImage"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content" />
                 <!-- <NumberPicker
                     android:id="@+id/yearPicker"
                     android:layout_width="wrap_content"
@@ -164,23 +184,64 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.781" />
 
-                <Button
-                    android:id="@+id/chooseImage"
-                    android:layout_width="150dp"
+                <TextView
+                    android:id="@+id/dateView"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="16dp"
-                    android:background="@color/colorAccent"
-                    android:paddingTop="8dp"
-                    android:paddingBottom="8dp"
-                    android:text="@string/button_addImage"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:ems="10"
+                    android:hint="@string/hint_guitarDate"
+                    android:inputType="number"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.888"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.781" />
 
-                <ImageView
-                    android:id="@+id/guitarImage"
-                    android:layout_width="150dp"
+                <RelativeLayout
+                    android:id="@+id/relativeLayout"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_launcher" />
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <Button
+                        android:id="@+id/btn_date_picker"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:background="@color/colorAccent"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="@string/button_addDate"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+
+                    <Button
+                        android:id="@+id/chooseImage"
+                        android:layout_width="160dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="16dp"
+                        android:background="@color/colorAccent"
+                        android:paddingTop="8dp"
+                        android:paddingBottom="8dp"
+                        android:text="@string/button_addImage"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="14sp" />
+
+                </RelativeLayout>
+
 
                 <Button
                     android:id="@+id/addGuitar"

@@ -3,11 +3,12 @@
     <string name="button_addGuitar">Add Guitar</string>
     <string name="button_addImage">Upload Image</string>
     <string name="button_saveGuitar">Save Guitar</string>
-    <string name="button_addCounty">Add County</string>
+    <string name="button_addDate">Add Date</string>
     <string name="valueTitle">Input Value</string>
     <string name="valueSubtitle">Evaluate Guitar</string>
     <string name="hint_guitarMake">Guitar Make</string>
     <string name="hint_guitarModel">Guitar Model</string>
+    <string name="hint_guitarDate">Manufacture Date</string>
     <string name="amount"><u>Valuation €</u>.</string>
     <string name="menu_addGuitar">Guitars</string>
     <string name="menu_cancelButton">Cancel</string>
@@ -15,6 +16,44 @@
     <string name="menu_homeButton">Home</string>
     <string name="select_guitar_image">Select guitar image</string>
     <string name="change_guitar_image">Change Image</string>
+    <string name="button_picker">Manufacture Date</string>
 
+
+    <string-array name="guitar_make_list">
+        <item>Aria</item>
+        <item>Ampeg</item>
+        <item>Charvel</item>
+        <item>Cort</item>
+        <item>Dean</item>
+        <item>Danelectro</item>
+        <item>Epiphone</item>
+        <item>ESP</item>
+        <item>Fender</item>
+        <item>Framus</item>
+        <item>Freshman</item>
+        <item>Gibson</item>
+        <item>Godin</item>
+        <item>Gretch</item>
+        <item>Hofner</item>
+        <item>Hohner</item>
+        <item>Ibanez</item>
+        <item>Jackson</item>
+        <item>Kramer</item>
+        <item>Lowden</item>
+        <item>MusicMan</item>
+        <item>Ovation</item>
+        <item>Parker</item>
+        <item>PRS</item>
+        <item>Rickenbacker</item>
+        <item>Schecter</item>
+        <item>Squier</item>
+        <item>Suhr</item>
+        <item>Takamine</item>
+        <item>Taylor</item>
+        <item>Tanglewood</item>
+        <item>Warwick</item>
+        <item>Washburn</item>
+        <item>Yamaha</item>
+    </string-array>
 
 </resources>

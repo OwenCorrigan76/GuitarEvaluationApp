@@ -16,7 +16,7 @@ data class GuitarModel(
     var value: Double = 0.0,
     var valuation: Double = 0.0,
     var id: Long = 0,
-    val year: Int = 0,
+    var manufactureDate: String = "",
     val serialNumber: Long = 0L,
     var image: Uri = Uri.EMPTY,  // default value is empty Uri
 ) : Parcelable

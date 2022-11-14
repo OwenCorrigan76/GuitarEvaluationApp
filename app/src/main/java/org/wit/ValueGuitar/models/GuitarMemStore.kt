@@ -42,6 +42,7 @@ class GuitarMemStore : GuitarStore {
             foundGuitar.guitarMake = guitar.guitarMake
             foundGuitar.guitarModel = guitar.guitarModel
             foundGuitar.valuation = guitar.valuation
+            foundGuitar.image = guitar.image
             logAll()
         }
     }

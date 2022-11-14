@@ -41,9 +41,10 @@ class GuitarAdapter constructor(
         /** We bind the object to the view to display in the card */
         fun bind(guitar: GuitarModel, listener: GuitarListener) {
          //   binding.value.text = ("€" + guitar.value.toDouble().toString())
-            binding.valuation.text = ("€" + guitar.valuation.toDouble().toString())
-            binding.guitarMake.text = guitar.guitarMake
-            binding.guitarModel.text = guitar.guitarModel
+            binding.valuation.text = ("Valuation: €" + guitar.valuation.toDouble().toString())
+            binding.guitarMake.text = ("Make: " + guitar.guitarMake)
+            binding.guitarModel.text = ("Model: " + guitar.guitarModel)
+            binding.dateView.text = ("Manufactured: " + guitar.manufactureDate)
             binding.root.setOnClickListener { listener.onGuitarClick(guitar) }
             Picasso.get().load(guitar.image).resize(200, 200).into(binding.imageIcon)
             binding.root.setOnClickListener { listener.onGuitarClick(guitar) }
