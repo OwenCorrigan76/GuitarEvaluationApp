@@ -37,7 +37,9 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/guitarMake"
             android:layout_marginTop="0dp"
+            android:textColor="@color/black"
             tools:text="Model" />
+
 
         <TextView
             android:id="@+id/guitarMake"
@@ -46,6 +48,7 @@
             android:layout_below="@id/value"
             android:layout_alignParentTop="true"
             android:layout_marginTop="48dp"
+            android:textColor="@color/black"
             tools:text="Make" />
 
         <TextView

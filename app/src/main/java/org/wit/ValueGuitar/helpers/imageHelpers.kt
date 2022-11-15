@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import org.wit.valueGuitar.R
 
-// this is a function (not a class) for image picker
+/** this is a function (not a class) for image picker. It will allow us to
+    display images and access network storage framework.
+ */
 fun showImagePicker(intentLauncher : ActivityResultLauncher<Intent>) {
     var chooseFile = Intent(Intent.ACTION_OPEN_DOCUMENT) // to allow the creation of a new document
     chooseFile.type = "image/*"

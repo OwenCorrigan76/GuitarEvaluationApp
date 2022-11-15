@@ -17,6 +17,8 @@
     <string name="select_guitar_image">Select guitar image</string>
     <string name="change_guitar_image">Change Image</string>
     <string name="button_picker">Manufacture Date</string>
+    <string name="button_location">Set Location</string>
+    <string name="title_activity_map">Map</string>
 
 
     <string-array name="guitar_make_list">
@@ -55,5 +57,6 @@
         <item>Washburn</item>
         <item>Yamaha</item>
     </string-array>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>

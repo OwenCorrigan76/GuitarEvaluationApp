@@ -10,6 +10,6 @@ interface GuitarStore {
     fun findById(id: Long) : GuitarModel?
     fun create(guitar: GuitarModel)
     fun update(guitar: GuitarModel)
-  //  fun delete(guitar: GuitarModel)
+    fun delete(guitar: GuitarModel)
 
 }

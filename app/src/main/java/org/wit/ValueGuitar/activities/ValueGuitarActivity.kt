@@ -22,6 +22,7 @@ import org.wit.valueGuitar.R
 import org.wit.valueGuitar.databinding.ActivityValueGuitarBinding
 import timber.log.Timber.i
 import com.squareup.picasso.Picasso
+import org.wit.ValueGuitar.models.Location
 
 /**
 This is the ValueGuitar activity in the app.
@@ -34,6 +35,8 @@ class ValueGuitarActivity : AppCompatActivity() {
     var gModel = GuitarModel() // get from the model
     lateinit var app: MainApp
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent> // initialise
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
+  //  var location = Location(52.245696, -7.139102, 15f)
 
     var edit = false
     val today = Calendar.getInstance()
@@ -74,14 +77,15 @@ class ValueGuitarActivity : AppCompatActivity() {
                         id: Long
                     ) {
                         if (make != null) {
-                            val spinnerPosition = arrayAdapter.getPosition(gModel.guitarMake)
+                            val spinnerPosition =
+                                arrayAdapter.getPosition( gModel.guitarMake)
                             spinner.setSelection(spinnerPosition)
                         }
-                        make.text = " ${types.get(position).toString()}"
+                        make.text = " ${types.get(position)}"
                     }
 
                     override fun onNothingSelected(parent: AdapterView<*>?) {
-                        make.text = "please select a festival type"
+                        make.text = "please select a guitar make"
                     }
                 }
         }
@@ -104,6 +108,7 @@ class ValueGuitarActivity : AppCompatActivity() {
             binding.guitarModelAdd.setText(gModel.guitarModel)
             binding.addGuitar.setText(R.string.button_saveGuitar)
             binding.dateView.setText(gModel.manufactureDate)
+
             Picasso.get()
                 .load(gModel.image)
                 .into(binding.guitarImage)
@@ -121,7 +126,7 @@ class ValueGuitarActivity : AppCompatActivity() {
             gModel.value = binding.valuePicker.value.toDouble()
             gModel.manufactureDate = binding.dateView.text.toString()
             if (gModel.guitarMake.isEmpty()) {
-                Snackbar.make(it, "You Must Enter Guitar Make", Snackbar.LENGTH_LONG)
+                Snackbar.make(it, "You Must Enter Guitar Make and valuation", Snackbar.LENGTH_LONG)
                     .show()
             } else {
                 if (edit) {
@@ -153,7 +158,21 @@ class ValueGuitarActivity : AppCompatActivity() {
             showImagePicker(imageIntentLauncher)
         }
 
+        binding.guitarLocation.setOnClickListener { // launch maps and pass location to MapActivity
+            val location = Location(52.245696, -7.139102, 15f)
+            if (gModel.zoom != 0f) {
+                location.lat =  gModel.lat
+                location.lng = gModel.lng
+                location.zoom = gModel.zoom
+            }
+
+            val launcherIntent = Intent(this, MapActivity::class.java)
+                .putExtra("location", location)
+            mapIntentLauncher.launch(launcherIntent)
+
+        }
         registerImagePickerCallback()
+        registerMapCallback()
     }
 
     /** inflates the menu **/
@@ -172,6 +191,7 @@ class ValueGuitarActivity : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
+    /**When the image is loaded, change the label*/
     private fun registerImagePickerCallback() {
         imageIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
@@ -192,6 +212,27 @@ class ValueGuitarActivity : AppCompatActivity() {
                 }
             }
     }
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { result ->
+                when (result.resultCode) {
+                    RESULT_OK -> {
+                        if (result.data != null) {
+                            i("Got Location ${result.data.toString()}")
+                            val location = result.data!!.extras?.getParcelable<Location>("location")!!
+                            i("Location == $location")
+                            gModel.lat = location.lat
+                            gModel.lng = location.lng
+                            gModel.zoom = location.zoom
+                        } // end of if
+                    }
+                    RESULT_CANCELED -> { } else -> { }
+                }
+            }
+    }
 }
+
+
 
 

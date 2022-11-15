@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import androidx.activity.result.ActivityResultLauncher
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.ValueGuitar.adapters.GuitarAdapter
 import org.wit.ValueGuitar.adapters.GuitarListener
@@ -16,6 +18,8 @@ import org.wit.valueGuitar.databinding.ActivityGuitarListBinding
 class GuitarListActivity : AppCompatActivity(), GuitarListener {
     lateinit var app: MainApp
     private lateinit var binding: ActivityGuitarListBinding
+    private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
+    private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,9 +35,13 @@ class GuitarListActivity : AppCompatActivity(), GuitarListener {
         binding.recyclerView.layoutManager = layoutManager
         /** get all information from the findAll method in the MemStore
         and bind it to the recycler view. */
-        binding.recyclerView.adapter = GuitarAdapter(app.guitars.findAll(), this)
+        loadGuitars()
+        registerRefreshCallback()
+        registerMapCallback()
+
     }
 
+    /**Menus here in appBar */
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_main, menu)
         return super.onCreateOptionsMenu(menu)
@@ -43,9 +51,14 @@ class GuitarListActivity : AppCompatActivity(), GuitarListener {
         when (item.itemId) {
             R.id.item_add -> {
                 val launcherIntent = Intent(this, ValueGuitarActivity::class.java)
-                startActivityForResult(launcherIntent, 0)
+                refreshIntentLauncher.launch(launcherIntent)
+            }
+            R.id.item_map -> {
+                val launcherIntent = Intent(this, MapActivity::class.java)
+                mapIntentLauncher.launch(launcherIntent)
             }
         }
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -59,13 +72,27 @@ class GuitarListActivity : AppCompatActivity(), GuitarListener {
     override fun onGuitarClick(guitar: GuitarModel) {
         val launcherIntent = Intent(this, ValueGuitarActivity::class.java)
         launcherIntent.putExtra("guitar_edit", guitar)
-        startActivityForResult(launcherIntent, 0)
+        refreshIntentLauncher.launch(launcherIntent)
+    }
+    private fun registerMapCallback() {
+        mapIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            {  }
+    }
+    private fun registerRefreshCallback() {
+        refreshIntentLauncher =
+            registerForActivityResult(ActivityResultContracts.StartActivityForResult())
+            { loadGuitars() }
     }
 
-    /** This function will update the Card view */
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    private fun loadGuitars() {
+        showGuitars(app.guitars.findAll())
+    }
+
+
+    fun showGuitars(guitars: List<GuitarModel>) {
+        binding.recyclerView.adapter = GuitarAdapter(guitars, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
-        super.onActivityResult(requestCode, resultCode, data)
     }
 }
 

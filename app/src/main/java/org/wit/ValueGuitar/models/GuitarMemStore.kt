@@ -43,11 +43,17 @@ class GuitarMemStore : GuitarStore {
             foundGuitar.guitarModel = guitar.guitarModel
             foundGuitar.valuation = guitar.valuation
             foundGuitar.image = guitar.image
+            foundGuitar.lat = foundGuitar.lat
+            foundGuitar.lng = foundGuitar.lng
+            foundGuitar.zoom = foundGuitar.zoom
             logAll()
         }
     }
     fun logAll() {
         Timber.v("** Guitars List **")
         guitars.forEach { Timber.v("Guitar ${it}") }
+    }
+    override fun delete(guitar: GuitarModel) {
+        guitars.remove(guitar)
     }
 }
