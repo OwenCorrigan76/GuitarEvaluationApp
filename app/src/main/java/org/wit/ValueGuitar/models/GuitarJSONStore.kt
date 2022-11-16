@@ -13,7 +13,7 @@ import java.lang.reflect.Type
 
 import java.util.*
 
-const val JSON_FILE = "festivals.json"
+const val JSON_FILE = "guitars.json"
 val gsonBuilder: Gson = GsonBuilder().setPrettyPrinting()
     .registerTypeAdapter(Uri::class.java, UriParser())
     .create()
@@ -38,8 +38,9 @@ class GuitarJSONStore(private val context: Context) : GuitarStore {
         return guitars
     }
 
-    override fun findById(id: Long): GuitarModel? {
-        TODO("Not yet implemented")
+    override fun findById(id:Long) : GuitarModel? {
+        val foundGuitar: GuitarModel? = guitars.find { it.id == id }
+        return foundGuitar
     }
 
     override fun create(guitar: GuitarModel) {
@@ -49,16 +50,16 @@ class GuitarJSONStore(private val context: Context) : GuitarStore {
     }
 
     override fun update(guitar: GuitarModel) {
-        var foundGuitar: GuitarModel? = guitars.find { p -> p.id == guitar.id }
+        val guitarList = findAll() as ArrayList<GuitarModel>
+        var foundGuitar: GuitarModel? = guitarList.find { p -> p.id == guitar.id }
         if (foundGuitar != null) {
             foundGuitar.guitarMake = guitar.guitarMake
             foundGuitar.guitarModel = guitar.guitarModel
             foundGuitar.valuation = guitar.valuation
             foundGuitar.image = guitar.image
-            foundGuitar.lat = foundGuitar.lat
-            foundGuitar.lng = foundGuitar.lng
-            foundGuitar.zoom = foundGuitar.zoom
-            logAll()
+            foundGuitar.lat = guitar.lat
+            foundGuitar.lng = guitar.lng
+            foundGuitar.zoom = guitar.zoom
         }
         serialize()
     }

@@ -3,16 +3,21 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../Library/Android/sdk/platforms/android-33/data/res/drawable/chooser_direct_share_icon_placeholder.xml" value="0.1" />
+        <entry key="app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1035" />
         <entry key="app/src/main/res/drawable/circle.xml" value="0.128" />
         <entry key="app/src/main/res/drawable/circlr_btn.xml" value="0.128" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.1035" />
         <entry key="app/src/main/res/drawable/round_button.xml" value="0.128" />
         <entry key="app/src/main/res/layout/activity_guitar_list.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/activity_guitar_maps.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_map.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_maps.xml" value="0.16302083333333334" />
         <entry key="app/src/main/res/layout/activity_music_store.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_placemark.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_value_guitar.xml" value="0.1" />
         <entry key="app/src/main/res/layout/card_guitar.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/content_guitar_maps.xml" value="0.41122131347656254" />
         <entry key="app/src/main/res/menu/menu_date.xml" value="0.1453125" />
         <entry key="app/src/main/res/menu/menu_guitar.xml" value="0.1453125" />
         <entry key="app/src/main/res/menu/menu_main.xml" value="0.1453125" />

@@ -21,9 +21,11 @@ data class GuitarModel(
     var image: Uri = Uri.EMPTY,  // default value is empty Uri
     var lat : Double = 0.0,
     var lng: Double = 0.0,
-    var zoom: Float = 0f) : Parcelable
+    var zoom: Float = 0f
+) : Parcelable
 
 @Parcelize
-data class Location(var lat: Double = 0.0,
+data class Location(
+    var lat: Double = 0.0,
                     var lng: Double = 0.0,
                     var zoom: Float = 0f) : Parcelable

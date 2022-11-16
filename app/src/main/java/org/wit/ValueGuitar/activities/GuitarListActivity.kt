@@ -12,6 +12,7 @@ import org.wit.ValueGuitar.adapters.GuitarAdapter
 import org.wit.ValueGuitar.adapters.GuitarListener
 import org.wit.ValueGuitar.main.MainApp
 import org.wit.ValueGuitar.models.GuitarModel
+import org.wit.guitar.activities.GuitarMapsActivity
 import org.wit.valueGuitar.R
 import org.wit.valueGuitar.databinding.ActivityGuitarListBinding
 
@@ -35,6 +36,7 @@ class GuitarListActivity : AppCompatActivity(), GuitarListener {
         binding.recyclerView.layoutManager = layoutManager
         /** get all information from the findAll method in the MemStore
         and bind it to the recycler view. */
+
         loadGuitars()
         registerRefreshCallback()
         registerMapCallback()
@@ -54,7 +56,7 @@ class GuitarListActivity : AppCompatActivity(), GuitarListener {
                 refreshIntentLauncher.launch(launcherIntent)
             }
             R.id.item_map -> {
-                val launcherIntent = Intent(this, MapActivity::class.java)
+                val launcherIntent = Intent(this, GuitarMapsActivity::class.java)
                 mapIntentLauncher.launch(launcherIntent)
             }
         }
@@ -90,7 +92,7 @@ class GuitarListActivity : AppCompatActivity(), GuitarListener {
     }
 
 
-    fun showGuitars(guitars: List<GuitarModel>) {
+    private fun showGuitars(guitars: List<GuitarModel>) {
         binding.recyclerView.adapter = GuitarAdapter(guitars, this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }

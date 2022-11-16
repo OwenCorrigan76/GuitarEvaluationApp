@@ -36,9 +36,10 @@ class ValueGuitarActivity : AppCompatActivity() {
     lateinit var app: MainApp
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent> // initialise
     private lateinit var mapIntentLauncher : ActivityResultLauncher<Intent>
-  //  var location = Location(52.245696, -7.139102, 15f)
+    var location = Location(52.245696, -7.139102, 15f)
 
     var edit = false
+
     val today = Calendar.getInstance()
     val year = today.get(Calendar.YEAR)
     val month = today.get(Calendar.MONTH)
@@ -47,7 +48,7 @@ class ValueGuitarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        edit = true
+
 
         binding = ActivityValueGuitarBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -102,6 +103,7 @@ class ValueGuitarActivity : AppCompatActivity() {
         will use id to know which object is being passed and updated */
 
         if (intent.hasExtra("guitar_edit")) {
+            edit = true
             gModel = intent.extras?.getParcelable("guitar_edit")!!
             binding.valuePicker.value.toString().toDouble()
             binding.valueAmount.setText("Valuation €" + gModel.valuation)
@@ -238,7 +240,3 @@ class ValueGuitarActivity : AppCompatActivity() {
             }
     }
 }
-
-
-
-

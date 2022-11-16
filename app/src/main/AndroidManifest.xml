@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="org.wit.valueGuitar" >
+    package="org.wit.valueGuitar">
 
     <application
         android:name="org.wit.ValueGuitar.main.MainApp"
@@ -9,16 +9,24 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MusicStore" >
+        android:theme="@style/Theme.MusicStore">
 
+
+        <activity
+            android:name="org.wit.guitar.activities.GuitarMapsActivity"
+            android:exported="true"
+            android:label="@string/title_activity_guitar_map"
+            android:theme="@style/Theme.MusicStore.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
+
         <activity
             android:name="org.wit.ValueGuitar.activities.MapActivity"
             android:exported="false"
-            android:label="@string/title_activity_maps" />
+            android:label="@string/title_activity_map" />
+
         <activity
             android:name="org.wit.ValueGuitar.activities.GuitarListActivity"
             android:exported="true" >
@@ -29,14 +37,8 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="org.wit.ValueGuitar.activities.ValueGuitarActivity"
-            android:exported="true" >
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
+            android:name="org.wit.ValueGuitar.activities.ValueGuitarActivity"/>
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
     </application>
 
 </manifest>

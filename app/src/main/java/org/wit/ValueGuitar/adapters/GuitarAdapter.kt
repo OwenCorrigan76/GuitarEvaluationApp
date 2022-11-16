@@ -1,5 +1,6 @@
 package org.wit.ValueGuitar.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -39,8 +40,9 @@ class GuitarAdapter constructor(
         RecyclerView.ViewHolder(binding.root) {
 
         /** We bind the object to the view to display in the card */
+        @SuppressLint("SetTextI18n")
         fun bind(guitar: GuitarModel, listener: GuitarListener) {
-         //   binding.value.text = ("€" + guitar.value.toDouble().toString())
+            //   binding.value.text = ("€" + guitar.value.toDouble().toString())
             binding.valuation.text = ("Valuation: €" + guitar.valuation.toDouble().toString())
             binding.guitarMake.text = ("Make: " + guitar.guitarMake)
             binding.guitarModel.text = ("Model: " + guitar.guitarModel)
