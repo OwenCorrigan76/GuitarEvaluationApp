@@ -2,7 +2,6 @@ package org.wit.ValueGuitar.models
 
 import android.content.Context
 import android.net.Uri
-import android.system.Os.read
 import com.google.gson.*
 import com.google.gson.reflect.TypeToken
 import org.wit.ValueGuitar.helpers.exists
@@ -11,8 +10,7 @@ import org.wit.ValueGuitar.helpers.write
 
 import timber.log.Timber
 import java.lang.reflect.Type
-import java.nio.file.Files.exists
-import java.nio.file.Files.write
+
 import java.util.*
 
 const val JSON_FILE = "festivals.json"

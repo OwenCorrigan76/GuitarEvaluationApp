@@ -47,6 +47,8 @@ class ValueGuitarActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        edit = true
+
         binding = ActivityValueGuitarBinding.inflate(layoutInflater)
         setContentView(binding.root)
         /**Below is our toolbar binded to @+id/toolbarAdd in layouts**/
@@ -100,7 +102,6 @@ class ValueGuitarActivity : AppCompatActivity() {
         will use id to know which object is being passed and updated */
 
         if (intent.hasExtra("guitar_edit")) {
-            edit = true
             gModel = intent.extras?.getParcelable("guitar_edit")!!
             binding.valuePicker.value.toString().toDouble()
             binding.valueAmount.setText("Valuation €" + gModel.valuation)
@@ -176,14 +177,19 @@ class ValueGuitarActivity : AppCompatActivity() {
     }
 
     /** inflates the menu **/
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.menu_guitar, menu)
+        if (edit && menu != null) menu.getItem(0).setVisible(true)
         return super.onCreateOptionsMenu(menu)
     }
 
     /** cancel in menu_guitar **/
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
+            R.id.item_delete -> {
+                app.guitars.delete(gModel)
+                finish()
+            }
             R.id.item_cancel -> {
                 finish()
             }
