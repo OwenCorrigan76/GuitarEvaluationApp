@@ -57,7 +57,7 @@ class ValueGuitarActivity : AppCompatActivity() {
         setSupportActionBar(binding.toolbarAdd)
 
         binding.valuePicker.minValue = 500
-        binding.valuePicker.maxValue = 50000
+        binding.valuePicker.maxValue = 10000
         binding.valuePicker.setOnValueChangedListener { _, _, newVal ->
             /** Display the evaluation amount based on the valuePicker amount **/
             binding.valueAmount.setText("Valuation € $newVal")

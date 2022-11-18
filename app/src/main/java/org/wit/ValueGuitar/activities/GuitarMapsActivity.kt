@@ -7,6 +7,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
 import com.google.android.gms.maps.model.MarkerOptions
+import com.squareup.picasso.Picasso
 import org.wit.ValueGuitar.main.MainApp
 import org.wit.valueGuitar.databinding.ActivityGuitarMapsBinding
 import org.wit.valueGuitar.databinding.ContentGuitarMapsBinding
@@ -37,6 +38,7 @@ class GuitarMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener 
     fun configureMap() {
         map.setOnMarkerClickListener(this)
         map.uiSettings.setZoomControlsEnabled(true)
+
         app.guitars.findAll().forEach {
             val loc = LatLng(it.lat, it.lng)
             val options = MarkerOptions().title(it.guitarMake).title(it.guitarMake).position(loc)
@@ -46,8 +48,16 @@ class GuitarMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener 
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        contentBinding.currentTitle.text = marker.title
-        return false
+        val tag = marker.tag as Long
+        val guitar = app.guitars.findById(tag)
+
+        contentBinding.currentTitle.text = guitar!!.guitarMake
+        contentBinding.currentDescription.text = guitar!!.guitarModel
+        Picasso.get()
+            .load(guitar.image)
+            .into(contentBinding.imageView2)
+
+        return true
     }
 
     override fun onDestroy() {

@@ -21,6 +21,7 @@
     <string name="button_location">Set Location</string>
     <string name="title_activity_map">Map</string>
     <string name="title_activity_guitar_maps">Map of all Locations</string>
+    <string name="action_addGuitar">Guitars</string>
 
 
     <string-array name="guitar_make_list">
