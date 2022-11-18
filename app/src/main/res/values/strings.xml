@@ -11,6 +11,8 @@
     <string name="hint_guitarDate">Manufacture Date</string>
     <string name="amount"><u>Valuation €</u>.</string>
     <string name="menu_addGuitar">Guitars</string>
+    <string name="menu_saveGuitar">Save</string>
+
     <string name="menu_cancelButton">Cancel</string>
     <string name="menu_deleteButton">Delete</string>
     <string name="menu_homeButton">Home</string>
