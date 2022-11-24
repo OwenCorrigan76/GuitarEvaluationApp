@@ -12,6 +12,8 @@
     <string name="amount"><u>Valuation €</u>.</string>
     <string name="menu_addGuitar">Guitars</string>
     <string name="menu_saveGuitar">Save</string>
+    <string name="action_guitar">Guitar </string>
+    <string name="action_guitarList">Guitar Lists </string>
 
     <string name="menu_cancelButton">Cancel</string>
     <string name="menu_deleteButton">Delete</string>
@@ -25,9 +27,14 @@
     <string name="title_activity_guitar_maps">Map of all Locations</string>
     <string name="enter_guitar_make">Enter Make</string>
     <string name="enter_guitar_model">Enter Model</string>
-
-
+    <string name="action_share">Share</string>
+    <string name="action_send">Send</string>
+    <string name="group_communicate">Communicate</string>
+    <string name="nav_header_title">Guitars (Lab)</string>
+    <string name="nav_header_subtitle">voteforhomer@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
     <string-array name="guitar_make_list">
+
         <item>Aria</item>
         <item>Ampeg</item>
         <item>Charvel</item>

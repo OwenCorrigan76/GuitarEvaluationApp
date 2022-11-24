@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="org.wit.valueGuitar">
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+
     <application
         android:name=".main.MainApp"
         android:allowBackup="true"
@@ -10,6 +12,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicStore">
+
+        <activity
+            android:name=".activities.Home"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+
         <activity
             android:name="org.wit.guitar.activities.GuitarMapsActivity"
             android:exported="true"
@@ -21,22 +38,10 @@
             android:value="${MAPS_API_KEY}" />
 
         <activity
-            android:name=".views.location.EditLocationView"
-            android:exported="true"
+            android:name=".activities.MapActivity"
+            android:exported="false"
             android:label="@string/title_activity_map" />
 
-        <activity
-            android:name=".views.guitarList.GuitarListView"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-<!--        <activity android:name=".activities.GuitarListActivity" />-->
-        <activity android:name=".views.guitar.GuitarView" />
 
     </application>
 

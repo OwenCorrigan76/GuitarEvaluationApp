@@ -61,7 +61,7 @@ class GuitarView : AppCompatActivity() {
                     ) {
                         if (make != null) {
                             val spinnerPosition =
-                                arrayAdapter.getPosition( gModel.guitarMake)
+                                arrayAdapter.getPosition(gModel.guitarMake)
                             spinner.setSelection(spinnerPosition)
                         }
                         make.text = " ${types.get(position)}"
@@ -81,6 +81,12 @@ class GuitarView : AppCompatActivity() {
             gModel.valuation = binding.valuePicker.value.toDouble()
             gModel.value = binding.valuePicker.value.toDouble()
             gModel.manufactureDate = binding.dateView.text.toString()
+            Picasso.get()
+                .load(gModel.image)
+                .into(binding.guitarImage)
+            if (gModel.image != Uri.EMPTY) {
+                binding.chooseImage.setText(R.string.change_guitar_image)
+            }
             if (gModel.guitarMake.isEmpty()) {
                 Snackbar.make(it, "You Must Enter Guitar Make and valuation", Snackbar.LENGTH_LONG)
                     .show()
@@ -89,7 +95,8 @@ class GuitarView : AppCompatActivity() {
                     gModel.guitarMake,
                     gModel.guitarModel,
                     gModel.valuation,
-                    gModel.manufactureDate
+                    gModel.manufactureDate,
+                    gModel.image
                 )
             }
             i("add Button Pressed: ${gModel.guitarMake + gModel.guitarModel + gModel.valuation + gModel.manufactureDate}")
@@ -126,12 +133,15 @@ class GuitarView : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when (item.itemId) {
+      /*  when (item.itemId) {
+            R.id.item_delete -> {
+                presenter.doDelete()
+            }
             R.id.item_cancel -> {
                 presenter.doCancel()
             }
 
-        }
+        }*/
         return super.onOptionsItemSelected(item)
     }
 
@@ -140,7 +150,7 @@ class GuitarView : AppCompatActivity() {
         binding.guitarMakeAdd.setText(gModel.guitarMake)
         binding.guitarMakeAdd.setText(gModel.guitarModel)
         binding.addGuitar.setText(R.string.button_saveGuitar)
-        binding.chooseImage.setText(R.string.change_guitar_image)
+        //  binding.chooseImage.setText(R.string.change_guitar_image)
         binding.guitarLocation.setText(R.string.button_location)
         Picasso.get()
             .load(gModel.image)
@@ -149,14 +159,16 @@ class GuitarView : AppCompatActivity() {
             binding.chooseImage.setText(R.string.change_guitar_image)
         }
     }
-    fun updateImage(image: Uri){
-        i("Image updated")
+
+    fun updateImage(image: Uri) {
+        i("Image now updated")
         Picasso.get()
             .load(image)
             .into(binding.guitarImage)
-        binding.chooseImage.setText(R.string.change_guitar_image)
+        if (gModel.image != Uri.EMPTY) {
+            binding.chooseImage.setText(R.string.change_guitar_image)
+        }
     }
-
 }
 
 

@@ -1,7 +1,6 @@
 package org.wit.valueGuitar.views.guitar
 import android.content.Intent
 import android.net.Uri
-import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -13,11 +12,10 @@ import org.wit.valueGuitar.databinding.ActivityValueGuitarBinding
 import org.wit.valueGuitar.views.location.EditLocationView
 import timber.log.Timber
 
-
-class GuitarPresenter(val view: GuitarView) {
+class GuitarPresenter(private val view: GuitarView) {
     var gModel = GuitarModel()
     lateinit var app: MainApp
-    lateinit var binding: ActivityValueGuitarBinding
+    var binding: ActivityValueGuitarBinding
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent> // initialise
     private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
     val location = Location(52.245696, -7.131902, 15f)
@@ -36,12 +34,12 @@ class GuitarPresenter(val view: GuitarView) {
 
     }
 
-    fun doAddOrSave(make: String, model: String, valuation: Double, manufactureDate: String) {
+    fun doAddOrSave(make: String, model: String, valuation: Double, manufactureDate: String, image: Uri) {
         gModel.guitarMake = make
         gModel.guitarModel = model
         gModel.valuation = valuation
         gModel.manufactureDate = manufactureDate
-    //    gModel.image = image
+        gModel.image = image
 
         if (edit) {
             app.guitars.update(gModel)
