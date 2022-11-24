@@ -12,8 +12,10 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import org.wit.guitar.activities.GuitarMapsActivity
+import org.wit.valueGuitar.activities.Home
 import org.wit.valueGuitar.adapters.GuitarAdapter
 import org.wit.valueGuitar.adapters.GuitarListener
+import org.wit.valueGuitar.databinding.ActivityValueGuitarBinding
 import org.wit.valueGuitar.databinding.FragmentGuitarListBinding
 import org.wit.valueGuitar.main.MainApp
 import org.wit.valueGuitar.models.GuitarModel
@@ -87,8 +89,7 @@ class GuitarListFragment : Fragment(), GuitarListener {
         return super.onOptionsItemSelected(item)
     }
     override fun onGuitarClick(guitar: GuitarModel) {
-
-        val launcherIntent = Intent(requireContext(), GuitarFragment::class.java)
+        val launcherIntent = Intent(requireContext(), Home::class.java)
         launcherIntent.putExtra("guitar_edit", guitar)
         refreshIntentLauncher.launch(launcherIntent)
     }
