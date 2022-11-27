@@ -97,7 +97,7 @@ class GuitarListFragment : Fragment(), GuitarListener {
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { loadGuitars() }
+            { }
     }
 
     private fun registerMapCallback() {

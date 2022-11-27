@@ -12,10 +12,6 @@
         tools:layout="@layout/fragment_guitar">
         <action
             android:id="@+id/action_guitarFragment_to_guitarListFragment"
-            app:destination="@id/main_navigation"
-            app:popUpTo="@id/main_navigation" />
-        <action
-            android:id="@+id/action_guitarFragment_to_guitarListFragment2"
             app:destination="@id/guitarListFragment"
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
@@ -31,4 +27,10 @@
             app:enterAnim="@anim/nav_default_enter_anim"
             app:exitAnim="@anim/nav_default_exit_anim" />
     </fragment>
+
+    <fragment
+        android:id="@+id/aboutusFragment"
+        android:name="org.wit.valueGuitar.AboutusFragment"
+        android:label="@string/action_about"
+    tools:layout="@layout/fragment_aboutus" />
 </navigation>
