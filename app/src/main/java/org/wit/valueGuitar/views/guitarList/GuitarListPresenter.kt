@@ -28,6 +28,7 @@ class GuitarListPresenter(val view: GuitarListView) {
         refreshIntentLauncher.launch(launcherIntent)
     }
 
+
     fun doEditGuitar(gModel: GuitarModel) {
         val launcherIntent = Intent(view, GuitarView::class.java)
         launcherIntent.putExtra("guitar_edit", gModel)

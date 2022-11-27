@@ -130,7 +130,9 @@ class GuitarView : AppCompatActivity() {
             R.id.item_cancel -> {
                 presenter.doCancel()
             }
-
+            R.id.item_delete -> {
+                presenter.doDelete()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
