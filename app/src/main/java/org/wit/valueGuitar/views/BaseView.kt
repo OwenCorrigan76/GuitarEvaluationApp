@@ -3,11 +3,9 @@ package org.wit.valueGuitar.views
 import android.content.Intent
 
 import android.os.Parcelable
-import android.support.v7.app.AppCompatActivity
-import android.support.v7.widget.Toolbar
+
 import android.widget.Toolbar
 import androidx.appcompat.app.AppCompatActivity
-import org.jetbrains.anko.AnkoLogger
 import org.wit.valueGuitar.models.GuitarModel
 import org.wit.valueGuitar.views.guitar.GuitarView
 import org.wit.valueGuitar.views.guitarList.GuitarListView
@@ -22,7 +20,7 @@ enum class VIEW {
     LOCATION, GUITAR, MAPS, LIST
 }
 
-open abstract class BaseView() : AppCompatActivity(), AnkoLogger {
+open abstract class BaseView() : AppCompatActivity() {
 
     var basePresenter: BasePresenter? = null
 
