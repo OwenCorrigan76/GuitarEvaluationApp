@@ -38,6 +38,11 @@
 <!--        <activity android:name=".activities.GuitarListActivity" />-->
         <activity android:name=".views.guitar.GuitarView" />
 
+        <activity
+            android:name=".views.map.GuitarMapView"
+            android:label="@string/title_activity_guitar_map"
+            android:theme="@style/AppTheme.PopupOverlay" />
+
     </application>
 
 </manifest>

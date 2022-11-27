@@ -14,7 +14,6 @@ class GuitarListPresenter(val view: GuitarListView) {
     var app: MainApp
     private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
-
     init {
         app = view.application as MainApp
         registerMapCallback()

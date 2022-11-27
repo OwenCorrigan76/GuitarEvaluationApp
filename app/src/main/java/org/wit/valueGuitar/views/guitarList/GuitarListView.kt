@@ -1,5 +1,6 @@
 package org.wit.valueGuitar.views.guitarList
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -50,6 +51,7 @@ class GuitarListView : AppCompatActivity(), GuitarListener {
 
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     private fun loadGuitars() {
         binding.recyclerView.adapter = GuitarAdapter(presenter.getGuitars(),this)
         binding.recyclerView.adapter?.notifyDataSetChanged()

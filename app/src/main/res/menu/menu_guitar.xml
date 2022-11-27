@@ -2,10 +2,13 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
+        android:id="@+id/item_save"
+        android:title="@string/menu_saveGuitar"
+        app:showAsAction="always" />
+    <item
         android:id="@+id/item_delete"
         android:title="@string/menu_deleteButton"
-        android:visible="true"
-        app:showAsAction="always" />
+        app:showAsAction="always"/>
     <item
         android:id="@+id/item_cancel"
         android:title="@string/menu_cancelButton"

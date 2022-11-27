@@ -1,64 +1,52 @@
-package org.wit.guitar.activities
+package org.wit.valueGuitar.views.map
+
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
-import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.Marker
-import com.google.android.gms.maps.model.MarkerOptions
 import com.squareup.picasso.Picasso
-import org.wit.valueGuitar.main.MainApp
 import org.wit.valueGuitar.databinding.ActivityGuitarMapsBinding
 import org.wit.valueGuitar.databinding.ContentGuitarMapsBinding
+import org.wit.valueGuitar.main.MainApp
+import org.wit.valueGuitar.models.GuitarModel
 
 
-class GuitarMapsActivity : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
+class GuitarMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
 
     private lateinit var binding: ActivityGuitarMapsBinding
     private lateinit var contentBinding: ContentGuitarMapsBinding
-    lateinit var map: GoogleMap
     lateinit var app: MainApp
+    lateinit var presenter: GuitarMapPresenter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         app = application as MainApp
         binding = ActivityGuitarMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        //binding.toolbar.title = title
         setSupportActionBar(binding.toolbar)
+
+        presenter = GuitarMapPresenter(this)
+
         contentBinding = ContentGuitarMapsBinding.bind(binding.root)
+
         contentBinding.mapView.onCreate(savedInstanceState)
-        contentBinding.mapView.getMapAsync {
-            map = it
-            configureMap()
+        contentBinding.mapView.getMapAsync{
+            presenter.doPopulateMap(it)
         }
     }
-
-    fun configureMap() {
-        map.setOnMarkerClickListener(this)
-        map.uiSettings.setZoomControlsEnabled(true)
-
-        app.guitars.findAll().forEach {
-            val loc = LatLng(it.lat, it.lng)
-            val options = MarkerOptions().title(it.guitarMake).title(it.guitarMake).position(loc)
-            map.addMarker(options)?.tag = it.id
-            map.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, it.zoom))
-        }
-    }
-
-    override fun onMarkerClick(marker: Marker): Boolean {
-        val tag = marker.tag as Long
-        val guitar = app.guitars.findById(tag)
-
-        contentBinding.currentGuitarMake.text = guitar!!.guitarMake
-        contentBinding.currentGuitarModel.text = guitar!!.guitarModel
-        contentBinding.currentValuation.text = guitar!!.valuation.toString()
-        contentBinding.currentManufactureDate.text = guitar!!.manufactureDate
+    fun showGuitar(guitar: GuitarModel) {
+        contentBinding.currentGuitarMake.text = guitar.guitarMake
+        contentBinding.currentGuitarModel.text = guitar.guitarModel
+        contentBinding.currentValuation.text = guitar.valuation.toString()
+        contentBinding.currentManufactureDate.text = guitar.manufactureDate
         Picasso.get()
             .load(guitar.image)
             .into(contentBinding.imageView2)
+    }
 
+    override fun onMarkerClick(marker: Marker): Boolean {
+        presenter.doMarkerSelected(marker)
         return true
     }
 
