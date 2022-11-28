@@ -2,8 +2,6 @@ package org.wit.valueGuitar.views.guitar
 import android.app.DatePickerDialog
 import android.content.Intent
 import android.icu.util.Calendar
-import android.net.Uri
-import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -69,9 +67,8 @@ class GuitarPresenter(val view: GuitarView) {
 
     }
 
-
     fun doSelectImage() {
-        showImagePicker(imageIntentLauncher)
+        showImagePicker( imageIntentLauncher)
     }
 
     fun doSetLocation() {
@@ -95,7 +92,7 @@ class GuitarPresenter(val view: GuitarView) {
 
      fun doSetDatePicker(){
         val dialogP = DatePickerDialog(
-            this,
+          view,
             { _, Year, Month, Day ->
                 val Month = Month + 1
                 binding.dateView.setText("$Day/$Month/$Year")

@@ -10,6 +10,7 @@ import org.wit.valueGuitar.R
 import org.wit.valueGuitar.databinding.ActivityGuitarListBinding
 import org.wit.valueGuitar.main.MainApp
 import org.wit.valueGuitar.models.GuitarModel
+import timber.log.Timber.i
 
 
 class GuitarListView : AppCompatActivity(), GuitarListener {
@@ -55,5 +56,11 @@ class GuitarListView : AppCompatActivity(), GuitarListener {
     private fun loadGuitars() {
         binding.recyclerView.adapter = GuitarAdapter(presenter.getGuitars(),this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
+    }
+    override fun onResume() {
+        //update the view
+        binding.recyclerView.adapter?.notifyDataSetChanged()
+        i("recyclerView onResume")
+        super.onResume()
     }
 }

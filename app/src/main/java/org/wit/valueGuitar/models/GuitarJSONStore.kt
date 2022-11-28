@@ -65,9 +65,11 @@ class GuitarJSONStore(private val context: Context) : GuitarStore {
     }
 
     override fun delete(guitar: GuitarModel) {
-        guitars.remove(guitar)
+        val foundGuitar: GuitarModel? = guitars.find { it.id == guitar.id }
+        guitars.remove(foundGuitar)
         serialize()
     }
+
     private fun serialize() {
         val jsonString = gsonBuilder.toJson(guitars, listType)
         write(context, JSON_FILE, jsonString)

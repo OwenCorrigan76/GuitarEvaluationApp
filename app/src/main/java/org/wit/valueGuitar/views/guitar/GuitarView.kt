@@ -76,19 +76,25 @@ class GuitarView : AppCompatActivity() {
         presenter = GuitarPresenter(this)
 
         binding.chooseImage.setOnClickListener {
-            /* presenter.cacheGuitar(
-                binding.guitarMakeAdd.text.toString(),
-                binding.guitarModelAdd.text.toString(),
-                binding.valuePicker.value.toDouble(),
-                binding.dateView.text.toString()
-            )*/
+            presenter.cacheGuitar(
+                gModel.guitarMake.toString(),
+                gModel.guitarModel.toString(),
+                gModel.valuation.toString().toDouble(),
+                gModel.manufactureDate.toString()
+            )
             presenter.doSelectImage()
         }
 
-
         binding.guitarLocation.setOnClickListener {
+            presenter.cacheGuitar(
+                gModel.guitarMake.toString(),
+                gModel.guitarModel.toString(),
+                gModel.valuation.toString().toDouble(),
+                gModel.manufactureDate.toString()
+            )
             presenter.doSetLocation()
         }
+
         /* binding.addGuitar.setOnClickListener {
             presenter.cacheGuitar(
                 binding.guitarMakeAdd.text.toString(),
@@ -116,15 +122,33 @@ class GuitarView : AppCompatActivity() {
         }*/
 
         binding.btnDatePicker.setOnClickListener {
-            presenter.doSetDatePicker()
+            val dialogP = DatePickerDialog(
+                this,
+                { _, Year, Month, Day ->
+                    val Month = Month + 1
+                    binding.dateView.setText("$Day/$Month/$Year")
+                }, year, month, day
+            )
+            dialogP.show()
         }
-
+        //displays today's date*/
         val toast = "Today's Date Is : $day/$month/$year"
         Toast.makeText(this, toast, Toast.LENGTH_SHORT).show()
+
+
+        /* binding.btnDatePicker.setOnClickListener {
+            presenter.doSetDatePicker()
+        }*/
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_guitar, menu)
+        val deleteMenu: MenuItem = menu.findItem(R.id.item_delete)
+        if (presenter.edit) {
+            deleteMenu.setVisible(true)
+        } else {
+            deleteMenu.setVisible(false)
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
@@ -132,7 +156,11 @@ class GuitarView : AppCompatActivity() {
         when (item.itemId) {
             R.id.item_save -> {
                 if (binding.guitarMake.toString().isEmpty()) {
-                    Snackbar.make(binding.root, R.string.enter_guitar_make, Snackbar.LENGTH_LONG)
+                    Snackbar.make(
+                        binding.root,
+                        R.string.enter_guitar_make,
+                        Snackbar.LENGTH_LONG
+                    )
                         .show()
                 } else {
                     presenter.doAddOrSave(
@@ -154,13 +182,13 @@ class GuitarView : AppCompatActivity() {
         return super.onOptionsItemSelected(item)
     }
 
-
     fun showGuitar(gModel: GuitarModel) {
         binding.guitarMakeAdd.setText(gModel.guitarMake)
         binding.guitarMakeAdd.setText(gModel.guitarModel)
         //  binding.addGuitar.setText(R.string.button_saveGuitar)
         binding.chooseImage.setText(R.string.change_guitar_image)
         binding.guitarLocation.setText(R.string.button_location)
+        binding.dateView.setText(gModel.manufactureDate)
         Picasso.get()
             .load(gModel.image)
             .into(binding.guitarImage)
@@ -177,6 +205,7 @@ class GuitarView : AppCompatActivity() {
         binding.chooseImage.setText(R.string.change_guitar_image)
     }
 }
+
 
 
 
