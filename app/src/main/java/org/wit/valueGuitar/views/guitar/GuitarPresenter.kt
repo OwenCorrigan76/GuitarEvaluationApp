@@ -1,5 +1,7 @@
 package org.wit.valueGuitar.views.guitar
+import android.app.DatePickerDialog
 import android.content.Intent
+import android.icu.util.Calendar
 import android.net.Uri
 import android.widget.ImageView
 import androidx.activity.result.ActivityResultLauncher
@@ -22,6 +24,10 @@ class GuitarPresenter(val view: GuitarView) {
     private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
     val location = Location(52.245696, -7.131902, 15f)
     var edit = false;
+    val today = Calendar.getInstance()
+    val year = today.get(Calendar.YEAR)
+    val month = today.get(Calendar.MONTH)
+    val day = today.get(Calendar.DAY_OF_MONTH)
 
     init {
          binding = ActivityValueGuitarBinding.inflate(view.layoutInflater)
@@ -86,6 +92,18 @@ class GuitarPresenter(val view: GuitarView) {
         gModel.manufactureDate = manufactureDate
       //  gModel.image = image
     }
+
+     fun doSetDatePicker(){
+        val dialogP = DatePickerDialog(
+            this,
+            { _, Year, Month, Day ->
+                val Month = Month + 1
+                binding.dateView.setText("$Day/$Month/$Year")
+            }, year, month, day
+        )
+        dialogP.show()
+    }
+    // displays today's date
 
     private fun registerImagePickerCallback() {
 

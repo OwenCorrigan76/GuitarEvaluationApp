@@ -76,7 +76,7 @@ class GuitarView : AppCompatActivity() {
         presenter = GuitarPresenter(this)
 
         binding.chooseImage.setOnClickListener {
-           /* presenter.cacheGuitar(
+            /* presenter.cacheGuitar(
                 binding.guitarMakeAdd.text.toString(),
                 binding.guitarModelAdd.text.toString(),
                 binding.valuePicker.value.toDouble(),
@@ -89,7 +89,7 @@ class GuitarView : AppCompatActivity() {
         binding.guitarLocation.setOnClickListener {
             presenter.doSetLocation()
         }
-       /* binding.addGuitar.setOnClickListener {
+        /* binding.addGuitar.setOnClickListener {
             presenter.cacheGuitar(
                 binding.guitarMakeAdd.text.toString(),
                 binding.guitarModelAdd.text.toString(),
@@ -116,19 +116,11 @@ class GuitarView : AppCompatActivity() {
         }*/
 
         binding.btnDatePicker.setOnClickListener {
-            val dialogP = DatePickerDialog(
-                this,
-                { _, Year, Month, Day ->
-                    val Month = Month + 1
-                    binding.dateView.setText("$Day/$Month/$Year")
-                }, year, month, day
-            )
-            dialogP.show()
+            presenter.doSetDatePicker()
         }
-        // displays today's date
+
         val toast = "Today's Date Is : $day/$month/$year"
         Toast.makeText(this, toast, Toast.LENGTH_SHORT).show()
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -154,7 +146,7 @@ class GuitarView : AppCompatActivity() {
             R.id.item_delete -> {
                 presenter.doDelete()
             }
-           R.id.item_cancel -> {
+            R.id.item_cancel -> {
                 presenter.doCancel()
             }
 
@@ -166,7 +158,7 @@ class GuitarView : AppCompatActivity() {
     fun showGuitar(gModel: GuitarModel) {
         binding.guitarMakeAdd.setText(gModel.guitarMake)
         binding.guitarMakeAdd.setText(gModel.guitarModel)
-      //  binding.addGuitar.setText(R.string.button_saveGuitar)
+        //  binding.addGuitar.setText(R.string.button_saveGuitar)
         binding.chooseImage.setText(R.string.change_guitar_image)
         binding.guitarLocation.setText(R.string.button_location)
         Picasso.get()

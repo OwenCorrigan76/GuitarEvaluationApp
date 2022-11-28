@@ -1,3 +1,4 @@
+/*
 package org.wit.valueGuitar.views
 
 import android.content.Intent
@@ -69,4 +70,4 @@ open abstract class BaseView() : AppCompatActivity() {
     open fun showGuitars(guitars: List<GuitarModel>) {}
     open fun showProgress() {}
     open fun hideProgress() {}
-}
+}*/

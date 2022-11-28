@@ -1,3 +1,4 @@
+/*
 package org.wit.valueGuitar.views
 
 import android.content.Intent
@@ -16,4 +17,4 @@ open class BasePresenter(var view: BaseView?) {
     open fun onDestroy() {
         view = null
     }
-}
+}*/
