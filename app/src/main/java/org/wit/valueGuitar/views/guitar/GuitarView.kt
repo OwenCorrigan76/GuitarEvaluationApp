@@ -121,7 +121,7 @@ class GuitarView : AppCompatActivity() {
                         finish ())
         }*/
 
-        binding.btnDatePicker.setOnClickListener {
+ /*       binding.btnDatePicker.setOnClickListener {
             val dialogP = DatePickerDialog(
                 this,
                 { _, Year, Month, Day ->
@@ -136,9 +136,9 @@ class GuitarView : AppCompatActivity() {
         Toast.makeText(this, toast, Toast.LENGTH_SHORT).show()
 
 
-        /* binding.btnDatePicker.setOnClickListener {
+         binding.btnDatePicker.setOnClickListener {
             presenter.doSetDatePicker()
-        }*/
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -203,6 +203,12 @@ class GuitarView : AppCompatActivity() {
             .load(image)
             .into(binding.guitarImage)
         binding.chooseImage.setText(R.string.change_guitar_image)
+    }
+
+    override fun onResume() {
+        //update the view
+        i("DatePicker")
+        super.onResume()
     }
 }
 
