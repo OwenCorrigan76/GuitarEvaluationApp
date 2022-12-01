@@ -2,6 +2,7 @@ package org.wit.valueGuitar.models
 
 import android.net.Uri
 import android.os.Parcelable
+import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
 
 /**     This is a class, just for storing data. I stores all the data that is used in the app.
@@ -11,6 +12,7 @@ around from activity to activity.
 
 @Parcelize
 data class GuitarModel(
+    @PrimaryKey(autoGenerate = true)
     var guitarMake: String = "",
     var guitarModel: String = "",
     var value: Double = 0.0,

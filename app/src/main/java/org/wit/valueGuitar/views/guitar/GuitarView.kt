@@ -10,6 +10,7 @@ import android.view.MenuItem
 import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
 import org.wit.valueGuitar.models.GuitarModel
@@ -20,6 +21,7 @@ import timber.log.Timber.i
 class GuitarView : AppCompatActivity() {
     private lateinit var binding: ActivityValueGuitarBinding
     private lateinit var presenter: GuitarPresenter
+    lateinit var map: GoogleMap
     var gModel = GuitarModel()
     val today = Calendar.getInstance()
     val year = today.get(Calendar.YEAR)
@@ -77,51 +79,31 @@ class GuitarView : AppCompatActivity() {
 
         binding.chooseImage.setOnClickListener {
             presenter.cacheGuitar(
-                gModel.guitarMake.toString(),
-                gModel.guitarModel.toString(),
-                gModel.valuation.toString().toDouble(),
-                gModel.manufactureDate.toString()
+                binding.guitarMakeAdd.text.toString(),
+                binding.guitarModelAdd.text.toString(),
+                //       binding.valuePicker.toString().toDouble(),
+                binding.dateView.text.toString()
             )
             presenter.doSelectImage()
         }
 
         binding.guitarLocation.setOnClickListener {
             presenter.cacheGuitar(
-                gModel.guitarMake.toString(),
-                gModel.guitarModel.toString(),
-                gModel.valuation.toString().toDouble(),
-                gModel.manufactureDate.toString()
+                binding.guitarMakeAdd.text.toString(),
+                binding.guitarModelAdd.text.toString(),
+                //       binding.valuePicker.toString().toDouble(),
+                binding.dateView.text.toString()
             )
             presenter.doSetLocation()
         }
 
-        /* binding.addGuitar.setOnClickListener {
-            presenter.cacheGuitar(
-                binding.guitarMakeAdd.text.toString(),
-                binding.guitarModelAdd.text.toString(),
-                binding.valuePicker.value.toDouble(),
-                binding.dateView.text.toString(),
-                if (gModel.guitarMake.isEmpty()) {
-                    Snackbar.make(
-                        it,
-                        "You Must Enter Guitar Make and valuation",
-                        Snackbar.LENGTH_LONG
-                    )
-                        .show()
-                } else {
-                    presenter.doAddOrSave(
-                        gModel.guitarMake,
-                        gModel.guitarModel,
-                        gModel.valuation,
-                        gModel.manufactureDate
-                    )
-                }
-                        i ("add Button Pressed: ${gModel.guitarMake + gModel.guitarModel + gModel.valuation + gModel.manufactureDate}")
-                        setResult (RESULT_OK)
-                        finish ())
-        }*/
+        binding.mapView2.onCreate(savedInstanceState);
+        binding.mapView2.getMapAsync {
+            map = it
+            presenter.doConfigureMap(map)
+        }
 
- /*       binding.btnDatePicker.setOnClickListener {
+        binding.btnDatePicker.setOnClickListener {
             val dialogP = DatePickerDialog(
                 this,
                 { _, Year, Month, Day ->
@@ -131,19 +113,15 @@ class GuitarView : AppCompatActivity() {
             )
             dialogP.show()
         }
-        //displays today's date*/
+        // displays today's date
         val toast = "Today's Date Is : $day/$month/$year"
         Toast.makeText(this, toast, Toast.LENGTH_SHORT).show()
-
-
-         binding.btnDatePicker.setOnClickListener {
-            presenter.doSetDatePicker()
-        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_guitar, menu)
         val deleteMenu: MenuItem = menu.findItem(R.id.item_delete)
+        /** Handle delete button's visibility */
         if (presenter.edit) {
             deleteMenu.setVisible(true)
         } else {
@@ -183,9 +161,8 @@ class GuitarView : AppCompatActivity() {
     }
 
     fun showGuitar(gModel: GuitarModel) {
-        binding.guitarMakeAdd.setText(gModel.guitarMake)
-        binding.guitarMakeAdd.setText(gModel.guitarModel)
-        //  binding.addGuitar.setText(R.string.button_saveGuitar)
+        if (binding.guitarMake.toString().isEmpty()) binding.guitarMakeAdd.setText(gModel.guitarMake)
+        if (binding.guitarModelAdd.toString().isEmpty()) binding.guitarModelAdd.setText(gModel.guitarModel)
         binding.chooseImage.setText(R.string.change_guitar_image)
         binding.guitarLocation.setText(R.string.button_location)
         binding.dateView.setText(gModel.manufactureDate)
@@ -195,6 +172,8 @@ class GuitarView : AppCompatActivity() {
         if (gModel.image != Uri.EMPTY) {
             binding.chooseImage.setText(R.string.change_guitar_image)
         }
+        binding.lat.setText("%.6f".format(gModel.lat))
+        binding.lng.setText("%.6f".format(gModel.lng))
     }
 
     fun updateImage(image: Uri) {
@@ -205,12 +184,32 @@ class GuitarView : AppCompatActivity() {
         binding.chooseImage.setText(R.string.change_guitar_image)
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.mapView2.onDestroy()
+    }
+
+    override fun onLowMemory() {
+        super.onLowMemory()
+        binding.mapView2.onLowMemory()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        binding.mapView2.onPause()
+    }
+
     override fun onResume() {
-        //update the view
-        i("DatePicker")
         super.onResume()
+        binding.mapView2.onResume()
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        binding.mapView2.onSaveInstanceState(outState)
     }
 }
+
 
 
 

@@ -43,7 +43,7 @@
                 <EditText
                     android:id="@+id/guitarMakeAdd"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="2dp"
                     android:layout_margin="8dp"
                     android:autofillHints=""
                     android:hint="@string/hint_guitarMake"
@@ -52,7 +52,8 @@
                     android:maxLines="1"
                     android:padding="8dp"
                     android:textColor="@color/colorPrimaryDark"
-                    android:textSize="14sp" />
+                    android:textSize="1sp"
+                    android:visibility="invisible" />
 
                 <Spinner
                     android:id="@+id/guitarMake"
@@ -265,23 +266,44 @@
                         android:text="@string/button_location"
                         android:textColor="@color/colorPrimary"
                         android:textSize="10sp" />
+
                 </RelativeLayout>
 
+                <TextView
+                    android:id="@+id/lat"
+                    android:layout_width="95dp"
+                    android:layout_height="19dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="28dp"
+                    android:text="00.000000"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/guitarLocation" />
+
+                <TextView
+                    android:id="@+id/lng"
+                    android:layout_width="92dp"
+                    android:layout_height="19dp"
+                    android:layout_marginTop="12dp"
+                    android:layout_marginEnd="28dp"
+                    android:text="00.000000"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/lat" />
 
 
-
-                    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView2"
-        android:layout_width="363dp"
-        android:layout_height="162dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="32dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guitarLocation" />
+                <com.google.android.gms.maps.MapView
+                    android:id="@+id/mapView2"
+                    android:layout_width="363dp"
+                    android:layout_height="162dp"
+                    android:layout_marginStart="32dp"
+                    android:layout_marginTop="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_marginBottom="32dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/guitarLocation" />
 
 
             </LinearLayout>
