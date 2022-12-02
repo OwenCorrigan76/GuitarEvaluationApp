@@ -77,6 +77,17 @@ class GuitarView : AppCompatActivity() {
         /** Create a Presenter object*/
         presenter = GuitarPresenter(this)
 
+       /* binding.btnDatePicker.setOnClickListener {
+            presenter.cacheGuitar(
+                binding.guitarMakeAdd.text.toString(),
+                binding.guitarModelAdd.text.toString(),
+                //       binding.valuePicker.toString().toDouble(),
+                binding.dateView.text.toString()
+            )
+            presenter.doSelectDate()
+        }
+*/
+
         binding.chooseImage.setOnClickListener {
             presenter.cacheGuitar(
                 binding.guitarMakeAdd.text.toString(),
@@ -94,14 +105,17 @@ class GuitarView : AppCompatActivity() {
                 //       binding.valuePicker.toString().toDouble(),
                 binding.dateView.text.toString()
             )
-            presenter.doSetLocation()
+         //   presenter.doSetLocation()
         }
 
-        binding.mapView2.onCreate(savedInstanceState);
-        binding.mapView2.getMapAsync {
+        binding.forGoogleMap.onCreate(savedInstanceState);
+        binding.forGoogleMap.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
+            it.setOnMapClickListener { presenter.doSetLocation() }
+
         }
+
 
         binding.btnDatePicker.setOnClickListener {
             val dialogP = DatePickerDialog(
@@ -117,6 +131,7 @@ class GuitarView : AppCompatActivity() {
         val toast = "Today's Date Is : $day/$month/$year"
         Toast.makeText(this, toast, Toast.LENGTH_SHORT).show()
     }
+
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.menu_guitar, menu)
@@ -186,27 +201,28 @@ class GuitarView : AppCompatActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        binding.mapView2.onDestroy()
+        binding.forGoogleMap.onDestroy()
     }
 
     override fun onLowMemory() {
         super.onLowMemory()
-        binding.mapView2.onLowMemory()
+        binding.forGoogleMap.onLowMemory()
     }
 
     override fun onPause() {
         super.onPause()
-        binding.mapView2.onPause()
+        binding.forGoogleMap.onPause()
     }
 
     override fun onResume() {
         super.onResume()
-        binding.mapView2.onResume()
+        binding.forGoogleMap.onResume()
+        presenter.doRestartLocationUpdates()
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        binding.mapView2.onSaveInstanceState(outState)
+        binding.forGoogleMap.onSaveInstanceState(outState)
     }
 }
 

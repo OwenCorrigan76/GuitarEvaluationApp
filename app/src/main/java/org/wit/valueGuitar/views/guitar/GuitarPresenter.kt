@@ -1,7 +1,6 @@
 package org.wit.valueGuitar.views.guitar
 
 import android.annotation.SuppressLint
-import android.app.DatePickerDialog
 import android.content.Intent
 import android.icu.util.Calendar
 import androidx.activity.result.ActivityResultLauncher
@@ -34,12 +33,17 @@ class GuitarPresenter(private val view: GuitarView) {
 
     var app: MainApp = view.application as MainApp
     private lateinit var binding: ActivityValueGuitarBinding
-    var locationService: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(view)
+
+    /** Pass in the view. Get GPS location from signals */
+    var locationService: FusedLocationProviderClient =
+        LocationServices.getFusedLocationProviderClient(view)
     private lateinit var imageIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
+
+    /** Note that below returns a String, not an Intent */
     private lateinit var requestPermissionLauncher: ActivityResultLauncher<String>
     var edit = false;
-    private val location = Location(52.245696, -7.139102, 15f)
+    private val defaultLocation = Location(52.245696, -7.139102, 15f)
     val today = Calendar.getInstance()
     val year = today.get(Calendar.YEAR)
     val month = today.get(Calendar.MONTH)
@@ -49,6 +53,7 @@ class GuitarPresenter(private val view: GuitarView) {
         doPermissionLauncher()
         registerImagePickerCallback()
         registerMapCallback()
+
 
         if (view.intent.hasExtra("guitar_edit")) {
             edit = true
@@ -60,8 +65,8 @@ class GuitarPresenter(private val view: GuitarView) {
                 /** on screen dialog box */
                 doSetCurrentLocation()
             }
-            gModel.lat = location.lat
-            gModel.lng = location.lng
+            gModel.lat = defaultLocation.lat
+            gModel.lng = defaultLocation.lng
         }
     }
 
@@ -94,21 +99,33 @@ class GuitarPresenter(private val view: GuitarView) {
         showImagePicker(imageIntentLauncher)
     }
 
+    /*  fun doSelectDate(){
+          val dialogP = DatePickerDialog(
+              view,
+              { _, Year, Month, Day ->
+                  val Month = Month + 1
+                  binding.dateView.setText("$Day/$Month/$Year")
+              }, year, month, day
+          )
+          dialogP.show()
+      }
+  */
+
     fun doSetLocation() {
         if (gModel.zoom != 0f) {
-            location.lat = gModel.lat
-            location.lng = gModel.lng
-            location.zoom = gModel.zoom
+            defaultLocation.lat = gModel.lat
+            defaultLocation.lng = gModel.lng
+            defaultLocation.zoom = gModel.zoom
             locationUpdate(gModel.lat, gModel.lng)
         }
         val launcherIntent = Intent(view, EditLocationView::class.java) // come back to
-            .putExtra("location", location)
+            .putExtra("location", defaultLocation)
         mapIntentLauncher.launch(launcherIntent)
     }
 
     @SuppressLint("MissingPermission")
     fun doSetCurrentLocation() {
-        /** passed from locationService*/
+        /** last location of phone when GPS was calles, passed from locationService*/
         locationService.lastLocation.addOnSuccessListener {
             locationUpdate(it.latitude, it.longitude)
         }
@@ -124,6 +141,7 @@ class GuitarPresenter(private val view: GuitarView) {
                 }
             }
         }
+        /** if not in edit mode */
         if (!edit) {
             locationService.requestLocationUpdates(locationRequest, locationCallback, null)
         }
@@ -157,25 +175,13 @@ class GuitarPresenter(private val view: GuitarView) {
     fun cacheGuitar(make: String, model: String, manufactureDate: String) {
         gModel.guitarMake = make;
         gModel.guitarModel = model
-    //    gModel.valuation = valuation
+        //    gModel.valuation = valuation
         gModel.manufactureDate = manufactureDate
         //  gModel.image = image
     }
 
-  /*  fun doSetDatePicker() {
-        val dialogP = DatePickerDialog(
-            view,
-            { _, Year, Month, Day ->
-                val Month = Month + 1
-                binding.dateView.setText("$Day/$Month/$Year")
-            }, year, month, day
-        )
-        dialogP.show()
-    }
-    // displays today's date*/
 
     private fun registerImagePickerCallback() {
-
         imageIntentLauncher =
             view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
             { result ->
@@ -225,10 +231,11 @@ class GuitarPresenter(private val view: GuitarView) {
             view.registerForActivityResult(ActivityResultContracts.RequestPermission())
             { isGranted: Boolean ->
                 if (isGranted) {
+                    /** If true, call doSetCurrentLocation() */
                     doSetCurrentLocation()
                 } else {
-                    /** set defaults */
-                    locationUpdate(location.lat, location.lng)
+                    /** call to set defaults */
+                    locationUpdate(defaultLocation.lat, defaultLocation.lng)
                 }
             }
     }

@@ -293,7 +293,7 @@
 
 
                 <com.google.android.gms.maps.MapView
-                    android:id="@+id/mapView2"
+                    android:id="@+id/forGoogleMap"
                     android:layout_width="363dp"
                     android:layout_height="162dp"
                     android:layout_marginStart="32dp"
