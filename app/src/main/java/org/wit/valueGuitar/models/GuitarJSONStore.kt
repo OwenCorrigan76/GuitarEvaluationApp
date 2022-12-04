@@ -57,9 +57,7 @@ class GuitarJSONStore(private val context: Context) : GuitarStore {
             foundGuitar.guitarModel = guitar.guitarModel
             foundGuitar.valuation = guitar.valuation
             foundGuitar.image = guitar.image
-            foundGuitar.lat = guitar.lat
-            foundGuitar.lng = guitar.lng
-            foundGuitar.zoom = guitar.zoom
+            foundGuitar.location = guitar.location
         }
         serialize()
     }

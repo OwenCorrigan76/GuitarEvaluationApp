@@ -43,9 +43,7 @@ class GuitarMemStore : GuitarStore {
             foundGuitar.guitarModel = guitar.guitarModel
             foundGuitar.valuation = guitar.valuation
             foundGuitar.image = guitar.image
-            foundGuitar.lat = foundGuitar.lat
-            foundGuitar.lng = foundGuitar.lng
-            foundGuitar.zoom = foundGuitar.zoom
+            foundGuitar.location = foundGuitar.location
             logAll()
         }
     }

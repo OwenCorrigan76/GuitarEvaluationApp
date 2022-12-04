@@ -195,8 +195,8 @@ class GuitarView : AppCompatActivity() {
         if (gModel.image != Uri.EMPTY) {
             binding.chooseImage.setText(R.string.change_guitar_image)
         }
-        binding.lat.setText("%.6f".format(gModel.lat))
-        binding.lng.setText("%.6f".format(gModel.lng))
+        binding.lat.setText("%.6f".format(gModel.location.lat))
+        binding.lng.setText("%.6f".format(gModel.location.lng))
     }
 
     fun updateImage(image: Uri) {

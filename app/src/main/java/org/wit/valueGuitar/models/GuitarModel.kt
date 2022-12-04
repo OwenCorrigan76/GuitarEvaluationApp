@@ -2,6 +2,7 @@ package org.wit.valueGuitar.models
 
 import android.net.Uri
 import android.os.Parcelable
+import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.Parcelize
@@ -22,9 +23,7 @@ data class GuitarModel(
     var manufactureDate: String = "",
     val serialNumber: Long = 0L,
     var image: Uri = Uri.EMPTY,  // default value is empty Uri
-    var lat: Double = 0.0,
-    var lng: Double = 0.0,
-    var zoom: Float = 0f
+    @Embedded var location : Location = Location()
 ) : Parcelable
 
 @Parcelize
