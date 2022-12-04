@@ -251,7 +251,7 @@
                         android:textColor="@color/colorPrimary"
                         android:textSize="10sp" />
 
-                    <Button
+                   <!-- <Button
                         android:id="@+id/guitarLocation"
                         android:layout_width="100dp"
                         android:layout_height="50dp"
@@ -265,7 +265,7 @@
                         android:stateListAnimator="@null"
                         android:text="@string/button_location"
                         android:textColor="@color/colorPrimary"
-                        android:textSize="10sp" />
+                        android:textSize="10sp" />-->
 
                 </RelativeLayout>
 

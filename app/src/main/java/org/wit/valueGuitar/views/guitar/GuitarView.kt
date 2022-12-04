@@ -101,7 +101,7 @@ class GuitarView : AppCompatActivity() {
             presenter.doSelectImage()
         }
 
-        binding.guitarLocation.setOnClickListener {
+     /*   binding.guitarLocation.setOnClickListener {
             presenter.cacheGuitar(
                 binding.guitarMakeAdd.text.toString(),
                 binding.guitarModelAdd.text.toString(),
@@ -109,7 +109,7 @@ class GuitarView : AppCompatActivity() {
                 binding.dateView.text.toString()
             )
          //   presenter.doSetLocation()
-        }
+        }*/
 
         binding.forGoogleMap.onCreate(savedInstanceState);
         binding.forGoogleMap.getMapAsync {
@@ -187,7 +187,7 @@ class GuitarView : AppCompatActivity() {
         if (binding.guitarMake.toString().isEmpty()) binding.guitarMakeAdd.setText(gModel.guitarMake)
         if (binding.guitarModelAdd.toString().isEmpty()) binding.guitarModelAdd.setText(gModel.guitarModel)
     //    if(binding.dateView.toString().isEmpty())binding.dateView.setText(gModel.manufactureDate)
-        binding.guitarLocation.setText(R.string.button_location)
+     //   binding.guitarLocation.setText(R.string.button_location)
         binding.dateView.setText(gModel.manufactureDate)
         Picasso.get()
             .load(gModel.image)
