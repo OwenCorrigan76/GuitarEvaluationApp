@@ -3,6 +3,7 @@ package org.wit.valueGuitar.views.guitar
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.icu.util.Calendar
+import android.net.Uri
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -70,12 +71,12 @@ class GuitarPresenter(private val view: GuitarView) {
         }
     }
 
-    fun doAddOrSave(make: String, model: String, valuation: Double, manufactureDate: String) {
+    suspend fun doAddOrSave(make: String, model: String, valuation: Double, manufactureDate: String) {
         gModel.guitarMake = make
         gModel.guitarModel = model
         gModel.valuation = valuation
         gModel.manufactureDate = manufactureDate
-        //    gModel.image = image
+     //   gModel.image = image
 
         if (edit) {
             app.guitars.update(gModel)
@@ -90,7 +91,9 @@ class GuitarPresenter(private val view: GuitarView) {
         view.finish()
     }
 
-    fun doDelete() {
+    /** change to susoend function call to match DAO and StroreRoom suspend functions */
+
+    suspend fun doDelete() {
         app.guitars.delete(gModel)
         view.finish()
     }
@@ -239,5 +242,4 @@ class GuitarPresenter(private val view: GuitarView) {
                 }
             }
     }
-
 }

@@ -19,16 +19,16 @@ class GuitarMemStore : GuitarStore {
 
     val guitars = ArrayList<GuitarModel>()
 
-    override fun findAll(): List<GuitarModel> {
+    override suspend fun findAll(): List<GuitarModel> {
         return guitars
     }
 
-    override fun findById(id:Long) : GuitarModel? {
+    override suspend fun findById(id:Long) : GuitarModel? {
         val foundGuitar: GuitarModel? = guitars.find { it.id == id }
         return foundGuitar
     }
 
-    override fun create(guitar: GuitarModel) {
+    override suspend fun create(guitar: GuitarModel) {
         guitar.id = getId()
         guitars.add(guitar)
         logAll()
@@ -36,7 +36,7 @@ class GuitarMemStore : GuitarStore {
 
     /** Update function. Used if the guitar object is edited */
 
-    override fun update(guitar: GuitarModel) {
+    override suspend fun update(guitar: GuitarModel) {
         var foundGuitar: GuitarModel? = guitars.find { p -> p.id == guitar.id }
         if (foundGuitar != null) {
             foundGuitar.guitarMake = guitar.guitarMake
@@ -53,7 +53,7 @@ class GuitarMemStore : GuitarStore {
         Timber.v("** Guitars List **")
         guitars.forEach { Timber.v("Guitar ${it}") }
     }
-    override fun delete(guitar: GuitarModel) {
+    override suspend fun delete(guitar: GuitarModel) {
         guitars.remove(guitar)
     }
 }

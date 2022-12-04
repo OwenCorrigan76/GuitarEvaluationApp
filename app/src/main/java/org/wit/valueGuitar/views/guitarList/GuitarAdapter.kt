@@ -40,14 +40,15 @@ class GuitarAdapter constructor(
         RecyclerView.ViewHolder(binding.root) {
 
         /** We bind the object to the view to display in the card */
+        @SuppressLint("SetTextI18n")
         fun bind(guitar: GuitarModel, listener: GuitarListener) {
             binding.valuation.text = ("Valuation: €" + guitar.valuation.toDouble().toString())
             binding.guitarMake.text = ("Make: " + guitar.guitarMake)
             binding.guitarModel.text = ("Model: " + guitar.guitarModel)
             binding.dateView.text = ("Manufactured: " + guitar.manufactureDate)
-            binding.root.setOnClickListener { listener.onGuitarClick(guitar) }
-            Picasso.get().load(guitar.image).resize(200, 200).into(binding.imageIcon)
            // binding.root.setOnClickListener { listener.onGuitarClick(guitar) }
+            Picasso.get().load(guitar.image).resize(200, 200).into(binding.imageIcon)
+            binding.root.setOnClickListener { listener.onGuitarClick(guitar) }
         }
     }
 }

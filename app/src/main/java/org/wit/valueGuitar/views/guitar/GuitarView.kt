@@ -13,6 +13,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.material.snackbar.Snackbar
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.wit.valueGuitar.models.GuitarModel
 import org.wit.valueGuitar.R
 import org.wit.valueGuitar.databinding.ActivityValueGuitarBinding
@@ -145,7 +148,7 @@ class GuitarView : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override  fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.item_save -> {
                 if (binding.guitarMake.toString().isEmpty()) {
@@ -156,16 +159,21 @@ class GuitarView : AppCompatActivity() {
                     )
                         .show()
                 } else {
+                    GlobalScope.launch(Dispatchers.IO) {
                     presenter.doAddOrSave(
                         binding.guitarMakeAdd.text.toString(),
                         binding.guitarModelAdd.text.toString(),
                         binding.valuePicker.value.toDouble(),
                         binding.dateView.text.toString()
+
                     )
+                }
                 }
             }
             R.id.item_delete -> {
-                presenter.doDelete()
+                GlobalScope.launch(Dispatchers.IO) {
+                    presenter.doDelete()
+                }
             }
             R.id.item_cancel -> {
                 presenter.doCancel()
@@ -178,7 +186,7 @@ class GuitarView : AppCompatActivity() {
     fun showGuitar(gModel: GuitarModel) {
         if (binding.guitarMake.toString().isEmpty()) binding.guitarMakeAdd.setText(gModel.guitarMake)
         if (binding.guitarModelAdd.toString().isEmpty()) binding.guitarModelAdd.setText(gModel.guitarModel)
-        binding.chooseImage.setText(R.string.change_guitar_image)
+    //    if(binding.dateView.toString().isEmpty())binding.dateView.setText(gModel.manufactureDate)
         binding.guitarLocation.setText(R.string.button_location)
         binding.dateView.setText(gModel.manufactureDate)
         Picasso.get()

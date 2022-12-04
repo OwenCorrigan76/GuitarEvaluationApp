@@ -14,7 +14,7 @@ class GuitarMapPresenter(val view: GuitarMapView) {
         app = view.application as MainApp
     }
 
-    fun doPopulateMap(map: GoogleMap) {
+    suspend fun doPopulateMap(map: GoogleMap) {
         map.uiSettings.setZoomControlsEnabled(true)
         map.setOnMarkerClickListener(view)
         app.guitars.findAll().forEach {
@@ -25,7 +25,7 @@ class GuitarMapPresenter(val view: GuitarMapView) {
         }
     }
 
-    fun doMarkerSelected(marker: Marker) {
+    suspend fun doMarkerSelected(marker: Marker) {
         val tag = marker.tag as Long
         val guitar = app.guitars.findById(tag)
         if (guitar != null) view.showGuitar(guitar)

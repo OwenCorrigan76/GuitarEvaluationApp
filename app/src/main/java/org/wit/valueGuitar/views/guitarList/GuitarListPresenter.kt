@@ -3,10 +3,13 @@ package org.wit.valueGuitar.views.guitarList
 import android.content.Intent
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
-import org.wit.guitar.activities.GuitarMapsActivity
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.wit.valueGuitar.main.MainApp
 import org.wit.valueGuitar.models.GuitarModel
 import org.wit.valueGuitar.views.guitar.GuitarView
+import org.wit.valueGuitar.views.map.GuitarMapView
 
 
 class GuitarListPresenter(val view: GuitarListView) {
@@ -20,7 +23,7 @@ class GuitarListPresenter(val view: GuitarListView) {
         registerRefreshCallback()
     }
 
-    fun getGuitars() = app.guitars.findAll()
+    suspend fun getGuitars() = app.guitars.findAll()
 
     fun doAddGuitar() {
         val launcherIntent = Intent(view, GuitarView::class.java)
@@ -35,16 +38,19 @@ class GuitarListPresenter(val view: GuitarListView) {
     }
 
     fun doShowGuitarsMap() {
-        val launcherIntent = Intent(view, GuitarMapsActivity::class.java)
+        val launcherIntent = Intent(view, GuitarMapView::class.java)
         refreshIntentLauncher.launch(launcherIntent)
     }
 
     private fun registerRefreshCallback() {
         refreshIntentLauncher =
             view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { getGuitars() }
+            {
+                GlobalScope.launch(Dispatchers.Main){
+                    getGuitars()
+                }
+            }
     }
-
     private fun registerMapCallback() {
         mapIntentLauncher =
             view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())

@@ -6,6 +6,9 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.wit.valueGuitar.R
 import org.wit.valueGuitar.databinding.ActivityGuitarListBinding
 import org.wit.valueGuitar.main.MainApp
@@ -19,7 +22,7 @@ class GuitarListView : AppCompatActivity(), GuitarListener {
     private lateinit var binding: ActivityGuitarListBinding
     lateinit var presenter: GuitarListPresenter
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override  fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityGuitarListBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -30,8 +33,7 @@ class GuitarListView : AppCompatActivity(), GuitarListener {
 
         val layoutManager = LinearLayoutManager(this)
         binding.recyclerView.layoutManager = layoutManager
-        loadGuitars()
-
+        updateRecyclerView()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -51,9 +53,16 @@ class GuitarListView : AppCompatActivity(), GuitarListener {
         presenter.doEditGuitar(gModel)
 
     }
+    private fun updateRecyclerView(){
+        GlobalScope.launch(Dispatchers.Main){
+            binding.recyclerView.adapter =
+                GuitarAdapter(presenter.getGuitars(), this@GuitarListView)
+        }
+    }
+
 
     @SuppressLint("NotifyDataSetChanged")
-    private fun loadGuitars() {
+    private suspend fun loadGuitars() {
         binding.recyclerView.adapter = GuitarAdapter(presenter.getGuitars(),this)
         binding.recyclerView.adapter?.notifyDataSetChanged()
     }

@@ -6,10 +6,10 @@ package org.wit.valueGuitar.models
 */
 
 interface GuitarStore {
-    fun findAll() : List<GuitarModel>
-    fun findById(id: Long) : GuitarModel?
-    fun create(guitar: GuitarModel)
-    fun update(guitar: GuitarModel)
-    fun delete(guitar: GuitarModel)
+    suspend fun findAll() : List<GuitarModel>
+    suspend fun findById(id: Long) : GuitarModel?
+    suspend fun create(guitar: GuitarModel)
+    suspend fun update(guitar: GuitarModel)
+    suspend fun delete(guitar: GuitarModel)
 
 }

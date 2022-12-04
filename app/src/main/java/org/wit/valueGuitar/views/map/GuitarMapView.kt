@@ -6,13 +6,16 @@ import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.model.Marker
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.wit.valueGuitar.databinding.ActivityGuitarMapsBinding
 import org.wit.valueGuitar.databinding.ContentGuitarMapsBinding
 import org.wit.valueGuitar.main.MainApp
 import org.wit.valueGuitar.models.GuitarModel
 
 
-class GuitarMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
+class GuitarMapView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
 
     private lateinit var binding: ActivityGuitarMapsBinding
     private lateinit var contentBinding: ContentGuitarMapsBinding
@@ -31,10 +34,13 @@ class GuitarMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
         contentBinding = ContentGuitarMapsBinding.bind(binding.root)
 
         contentBinding.mapView.onCreate(savedInstanceState)
-        contentBinding.mapView.getMapAsync{
-            presenter.doPopulateMap(it)
+        contentBinding.mapView.getMapAsync {
+            GlobalScope.launch(Dispatchers.Main) {
+                presenter.doPopulateMap(it)
+            }
         }
     }
+
     fun showGuitar(guitar: GuitarModel) {
         contentBinding.currentGuitarMake.text = guitar.guitarMake
         contentBinding.currentGuitarModel.text = guitar.guitarModel
@@ -46,10 +52,11 @@ class GuitarMapView : AppCompatActivity() , GoogleMap.OnMarkerClickListener{
     }
 
     override fun onMarkerClick(marker: Marker): Boolean {
-        presenter.doMarkerSelected(marker)
-        return true
+        GlobalScope.launch(Dispatchers.Main) {
+            presenter.doMarkerSelected(marker)
+        }
+            return true
     }
-
     override fun onDestroy() {
         super.onDestroy()
         contentBinding.mapView.onDestroy()

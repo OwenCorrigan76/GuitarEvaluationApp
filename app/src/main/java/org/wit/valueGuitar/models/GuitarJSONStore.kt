@@ -33,23 +33,23 @@ class GuitarJSONStore(private val context: Context) : GuitarStore {
         }
     }
 
-    override fun findAll(): MutableList<GuitarModel> {
+    override suspend fun findAll(): MutableList<GuitarModel> {
         logAll()
         return guitars
     }
 
-    override fun findById(id:Long) : GuitarModel? {
+    override suspend fun findById(id:Long) : GuitarModel? {
         val foundGuitar: GuitarModel? = guitars.find { it.id == id }
         return foundGuitar
     }
 
-    override fun create(guitar: GuitarModel) {
+    override suspend fun create(guitar: GuitarModel) {
         guitar.id = generateRandomId()
         guitars.add(guitar)
         serialize()
     }
 
-    override fun update(guitar: GuitarModel) {
+    override suspend fun update(guitar: GuitarModel) {
         val guitarList = findAll() as ArrayList<GuitarModel>
         var foundGuitar: GuitarModel? = guitarList.find { p -> p.id == guitar.id }
         if (foundGuitar != null) {
@@ -64,7 +64,7 @@ class GuitarJSONStore(private val context: Context) : GuitarStore {
         serialize()
     }
 
-    override fun delete(guitar: GuitarModel) {
+    override suspend fun delete(guitar: GuitarModel) {
         val foundGuitar: GuitarModel? = guitars.find { it.id == guitar.id }
         guitars.remove(foundGuitar)
         serialize()

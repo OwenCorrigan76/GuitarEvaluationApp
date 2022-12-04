@@ -16,7 +16,7 @@
     <string name="menu_cancelButton">Cancel</string>
     <string name="menu_deleteButton">Delete</string>
     <string name="menu_homeButton">Home</string>
-    <string name="title_activity_guitar_map">Map of All Locations </string>
+    <string name="title_activity_guitar_map">Added Guitar Markers </string>
     <string name="select_guitar_image">Select guitar image</string>
     <string name="change_guitar_image">Change Image</string>
     <string name="button_picker">Manufacture Date</string>
