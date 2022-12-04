@@ -66,8 +66,8 @@ class GuitarPresenter(private val view: GuitarView) {
                 /** on screen dialog box */
                 doSetCurrentLocation()
             }
-            gModel.lat = defaultLocation.lat
-            gModel.lng = defaultLocation.lng
+            gModel.location.lat = defaultLocation.lat
+            gModel.location.lng = defaultLocation.lng
         }
     }
 
@@ -115,11 +115,11 @@ class GuitarPresenter(private val view: GuitarView) {
   */
 
     fun doSetLocation() {
-        if (gModel.zoom != 0f) {
-            defaultLocation.lat = gModel.lat
-            defaultLocation.lng = gModel.lng
-            defaultLocation.zoom = gModel.zoom
-            locationUpdate(gModel.lat, gModel.lng)
+        if (gModel.location.zoom != 0f) {
+            defaultLocation.lat = gModel.location.lat
+            defaultLocation.lng = gModel.location.lng
+            defaultLocation.zoom = gModel.location.zoom
+            locationUpdate(gModel.location.lat, gModel.location.lng)
         }
         val launcherIntent = Intent(view, EditLocationView::class.java) // come back to
             .putExtra("location", defaultLocation)
@@ -152,24 +152,24 @@ class GuitarPresenter(private val view: GuitarView) {
 
     fun doConfigureMap(m: GoogleMap) {
         map = m
-        locationUpdate(gModel.lat, gModel.lng)
+        locationUpdate(gModel.location.lat, gModel.location.lng)
     }
 
 
     /** updates the location marker on the map */
     fun locationUpdate(lat: Double, lng: Double) {
-        gModel.lat = lat
-        gModel.lng = lng
-        gModel.zoom = 15f
+        gModel.location.lat = lat
+        gModel.location.lng = lng
+        gModel.location.zoom = 15f
         map?.clear()
         map?.uiSettings?.setZoomControlsEnabled(true)
         val options =
-            MarkerOptions().title(gModel.guitarMake).position(LatLng(gModel.lat, gModel.lng))
+            MarkerOptions().title(gModel.guitarMake).position(LatLng(gModel.location.lat, gModel.location.lng))
         map?.addMarker(options)
         map?.moveCamera(
             CameraUpdateFactory.newLatLngZoom(
-                LatLng(gModel.lat, gModel.lng),
-                gModel.zoom
+                LatLng(gModel.location.lat, gModel.location.lng),
+                gModel.location.zoom
             )
         )
         view?.showGuitar(gModel)
@@ -216,9 +216,9 @@ class GuitarPresenter(private val view: GuitarView) {
                             val location =
                                 result.data!!.extras?.getParcelable<Location>("location")!!
                             Timber.i("Location == $location")
-                            gModel.lat = location.lat
-                            gModel.lng = location.lng
-                            gModel.zoom = location.zoom
+                            gModel.location.lat = location.lat
+                            gModel.location.lng = location.lng
+                            gModel.location.zoom = location.zoom
                         } // end of if
                     }
                     AppCompatActivity.RESULT_CANCELED -> {}

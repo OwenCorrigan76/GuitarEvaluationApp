@@ -111,7 +111,7 @@ class GuitarView : AppCompatActivity() {
          //   presenter.doSetLocation()
         }*/
 
-        binding.forGoogleMap.onCreate(savedInstanceState);
+        binding.forGoogleMap.onCreate(savedInstanceState)
         binding.forGoogleMap.getMapAsync {
             map = it
             presenter.doConfigureMap(map)
@@ -195,6 +195,7 @@ class GuitarView : AppCompatActivity() {
         if (gModel.image != Uri.EMPTY) {
             binding.chooseImage.setText(R.string.change_guitar_image)
         }
+        /** get from embeded location object */
         binding.lat.setText("%.6f".format(gModel.location.lat))
         binding.lng.setText("%.6f".format(gModel.location.lng))
     }
