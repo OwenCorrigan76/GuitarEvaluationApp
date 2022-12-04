@@ -12,12 +12,12 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.MusicStore">
+        android:theme="@style/Theme.GuitarApp">
         <activity
-            android:name="org.wit.guitar.activities.GuitarMapsActivity"
+            android:name="org.wit.valueGuitar.views.map.GuitarMapView"
             android:exported="true"
             android:label="@string/title_activity_guitar_map"
-            android:theme="@style/Theme.MusicStore.NoActionBar" />
+            android:theme="@style/Theme.GuitarApp.NoActionBar" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -40,11 +40,6 @@
 
 <!--        <activity android:name=".activities.GuitarListActivity" />-->
         <activity android:name=".views.guitar.GuitarView" />
-
-        <activity
-            android:name=".views.map.GuitarMapView"
-            android:label="@string/title_activity_guitar_map"
-            android:theme="@style/AppTheme.PopupOverlay" />
 
     </application>
 

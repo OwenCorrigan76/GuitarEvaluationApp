@@ -1,6 +1,6 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Theme.MusicStore" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <style name="Theme.GuitarApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorPrimary">@color/colorAccent</item>
         <item name="colorPrimaryVariant">@color/colorPrimaryDark</item>
@@ -14,14 +14,14 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="Theme.MusicStore.NoActionBar">
+    <style name="Theme.GuitarApp.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
-    <style name="Theme.Guitar.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+    <style name="Theme.GuitarApp.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-    <style name="Theme.Guitar.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="Theme.GuitarApp.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="Theme.MusicStore.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 

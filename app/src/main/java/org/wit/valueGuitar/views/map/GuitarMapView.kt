@@ -40,6 +40,12 @@ class GuitarMapView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
             }
         }
     }
+    override fun onMarkerClick(marker: Marker): Boolean {
+        GlobalScope.launch(Dispatchers.Main) {
+            presenter.doMarkerSelected(marker)
+        }
+        return true
+    }
 
     fun showGuitar(guitar: GuitarModel) {
         contentBinding.currentGuitarMake.text = guitar.guitarMake
@@ -51,12 +57,7 @@ class GuitarMapView : AppCompatActivity(), GoogleMap.OnMarkerClickListener {
             .into(contentBinding.imageView2)
     }
 
-    override fun onMarkerClick(marker: Marker): Boolean {
-        GlobalScope.launch(Dispatchers.Main) {
-            presenter.doMarkerSelected(marker)
-        }
-            return true
-    }
+
     override fun onDestroy() {
         super.onDestroy()
         contentBinding.mapView.onDestroy()

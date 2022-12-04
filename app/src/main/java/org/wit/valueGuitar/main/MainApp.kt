@@ -4,6 +4,7 @@ import android.app.Application
 import org.wit.valueGuitar.models.GuitarJSONStore
 import org.wit.valueGuitar.models.GuitarMemStore
 import org.wit.valueGuitar.models.GuitarStore
+import org.wit.valueGuitar.room.GuitarStoreRoom
 import timber.log.Timber
 import timber.log.Timber.i
 
@@ -14,7 +15,7 @@ class MainApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        guitars = GuitarJSONStore(applicationContext)
+        guitars = GuitarStoreRoom(applicationContext)
         i("Guitar app started")
     }
 }
