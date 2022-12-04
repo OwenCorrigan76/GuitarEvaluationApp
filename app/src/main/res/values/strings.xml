@@ -12,6 +12,7 @@
     <string name="amount"><u>Valuation €</u>.</string>
     <string name="menu_addGuitar">Guitars</string>
     <string name="menu_saveGuitar">Save</string>
+    <string name="title_activity_login"> Signup/Login to Guitar Evaluation App</string>
 
     <string name="menu_cancelButton">Cancel</string>
     <string name="menu_deleteButton">Delete</string>
