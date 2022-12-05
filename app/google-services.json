@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "145762525079",
+    "project_id": "guitarapp-ba210",
+    "storage_bucket": "guitarapp-ba210.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:145762525079:android:0fe23e92c52e941b58aed2",
+        "android_client_info": {
+          "package_name": "org.wit.valueGuitar"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "145762525079-2rv73kp5dq5rmfvack2t7350g76di9ca.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDX8-b0rXG8e4sjMQEqeF2oQ9nzDdr-JKA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "145762525079-2rv73kp5dq5rmfvack2t7350g76di9ca.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

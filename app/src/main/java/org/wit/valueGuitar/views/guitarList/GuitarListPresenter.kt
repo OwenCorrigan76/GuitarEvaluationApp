@@ -9,6 +9,7 @@ import kotlinx.coroutines.launch
 import org.wit.valueGuitar.main.MainApp
 import org.wit.valueGuitar.models.GuitarModel
 import org.wit.valueGuitar.views.guitar.GuitarView
+import org.wit.valueGuitar.views.login.LoginView
 import org.wit.valueGuitar.views.map.GuitarMapView
 
 
@@ -17,9 +18,12 @@ class GuitarListPresenter(val view: GuitarListView) {
     var app: MainApp
     private lateinit var refreshIntentLauncher: ActivityResultLauncher<Intent>
     private lateinit var mapIntentLauncher: ActivityResultLauncher<Intent>
+    private lateinit var editIntentLauncher : ActivityResultLauncher<Intent>
+
     init {
         app = view.application as MainApp
-        registerMapCallback()
+       // registerMapCallback()
+        registerEditCallback()
         registerRefreshCallback()
     }
 
@@ -27,19 +31,23 @@ class GuitarListPresenter(val view: GuitarListView) {
 
     fun doAddGuitar() {
         val launcherIntent = Intent(view, GuitarView::class.java)
-        refreshIntentLauncher.launch(launcherIntent)
+        editIntentLauncher.launch(launcherIntent)
     }
 
 
     fun doEditGuitar(gModel: GuitarModel) {
         val launcherIntent = Intent(view, GuitarView::class.java)
         launcherIntent.putExtra("guitar_edit", gModel)
-        mapIntentLauncher.launch(launcherIntent)
+        editIntentLauncher.launch(launcherIntent)
     }
 
     fun doShowGuitarsMap() {
         val launcherIntent = Intent(view, GuitarMapView::class.java)
-        refreshIntentLauncher.launch(launcherIntent)
+        editIntentLauncher.launch(launcherIntent)
+    }
+    fun doLogout(){
+        val launcherIntent = Intent(view, LoginView::class.java)
+        editIntentLauncher.launch(launcherIntent)
     }
 
     private fun registerRefreshCallback() {
@@ -51,9 +59,11 @@ class GuitarListPresenter(val view: GuitarListView) {
                 }
             }
     }
-    private fun registerMapCallback() {
-        mapIntentLauncher =
+
+    private fun registerEditCallback() {
+        editIntentLauncher =
             view.registerForActivityResult(ActivityResultContracts.StartActivityForResult())
-            { }
+            {  }
+
     }
 }

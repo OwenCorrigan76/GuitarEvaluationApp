@@ -13,7 +13,8 @@
     <string name="menu_addGuitar">Guitars</string>
     <string name="menu_saveGuitar">Save</string>
     <string name="title_activity_login"> Signup/Login to Guitar Evaluation App</string>
-
+    <string name="menu_showMap">Show Map</string>
+    <string name="menu_logout">Logout</string>
     <string name="menu_cancelButton">Cancel</string>
     <string name="menu_deleteButton">Delete</string>
     <string name="menu_homeButton">Home</string>

@@ -15,7 +15,7 @@ class MainApp : Application() {
     override fun onCreate() {
         super.onCreate()
         Timber.plant(Timber.DebugTree())
-        guitars = GuitarStoreRoom(applicationContext)
+        guitars = GuitarJSONStore(applicationContext)
         i("Guitar app started")
     }
 }

@@ -6,6 +6,7 @@ import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -26,7 +27,10 @@ class GuitarListView : AppCompatActivity(), GuitarListener {
         super.onCreate(savedInstanceState)
         binding = ActivityGuitarListBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        binding.toolbar.title = title
+        val user = FirebaseAuth.getInstance().currentUser
+        if (user != null) {
+            binding.toolbar.title = "${title}: ${user.email}"
+        }
         setSupportActionBar(binding.toolbar)
         presenter = GuitarListPresenter(this)
         app = application as MainApp
@@ -45,6 +49,7 @@ class GuitarListView : AppCompatActivity(), GuitarListener {
         when (item.itemId) {
             R.id.item_add -> { presenter.doAddGuitar() }
             R.id.item_map -> { presenter.doShowGuitarsMap() }
+            R.id.item_logout -> { presenter.doLogout() }
         }
         return super.onOptionsItemSelected(item)
     }
